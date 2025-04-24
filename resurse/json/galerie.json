@@ -1,0 +1,103 @@
+{
+  "cale_galerie": "resurse/imagini/galerieSatica",
+  "imagini": [
+    {
+      "cale_relativa": "cana_motivationala.png",
+      "nume_imag": "Cană cu mesaj motivațional",
+      "alternativ": "cana personalizata",
+      "descriere_imag": "Începe-ți ziua cu o doză de motivație!",
+      "intervale_ore": [[6, 11]]
+    },
+    {
+      "cale_relativa": "agenda_eleganta.png",
+      "nume_imag": "Agendă elegantă",
+      "alternativ": "agenda personalizata",
+      "descriere_imag": "Un cadou elegant pentru cei organizați.",
+      "intervale_ore": [[6, 11], [16,19]]
+    },
+    {
+      "cale_relativa": "tricou_amuzant.png",
+      "nume_imag": "Tricou amuzant",
+      "alternativ": "tricou personalizat",
+      "descriere_imag": "Tricouri perfecte pentru pauza de prânz!",
+      "intervale_ore": [[12, 15]]
+    },
+    {
+      "cale_relativa": "breloc_personalizat.png",
+      "nume_imag": "Breloc personalizat",
+      "alternativ": "breloc cu mesaj",
+      "descriere_imag": "Un cadou mic, dar cu mare impact – brelocul personalizat.",
+      "intervale_ore": [[12, 15]]
+    },
+    {
+      "cale_relativa": "rama_foto_cuplu.png",
+      "nume_imag": "Rama foto cuplu",
+      "alternativ": "rama cuplu",
+      "descriere_imag": "Un cadou romantic de după-amiază.",
+      "intervale_ore": [[16, 19]]
+    },
+    {
+      "cale_relativa": "lampa_personalizata.png",
+      "nume_imag": "Lampa personalizata",
+      "alternativ": "lampa personalizata",
+      "descriere_imag": "Creeaza o atmosfera unica cu o lampa personalizata.",
+      "intervale_ore": [[20, 23]]
+    },
+    {
+      "cale_relativa": "perna_chill.png",
+      "nume_imag": "Pernă relaxare",
+      "alternativ": "perna personalizata",
+      "descriere_imag": "Pentru nopți liniștite și vise frumoase.",
+      "intervale_ore": [[0, 2]]
+    },
+    {
+      "cale_relativa": "set_cadou_birou.png",
+      "nume_imag": "Set cadou birou",
+      "alternativ": "set birou personalizat",
+      "descriere_imag": "Ideal pentru începutul zilei la birou.",
+      "intervale_ore": [[6, 11]]
+    },
+    {
+      "cale_relativa": "sticla_personalizata.png",
+      "nume_imag": "Sticlă personalizată",
+      "alternativ": "sticla personalizata",
+      "descriere_imag": "Pentru o hidratare stilată în pauza de prânz.",
+      "intervale_ore": [[12, 15]]
+    },
+    {
+      "cale_relativa": "ceas_personalizat.png",
+      "nume_imag": "Ceas personalizat",
+      "alternativ": "ceas elegant personalizat",
+      "descriere_imag": "Un ceas de perete unic pentru casă sau birou.",
+      "intervale_ore": [[16, 19]]
+    },
+    {
+      "cale_relativa": "cutie_amintiri.png",
+      "nume_imag": "Cutie cu amintiri",
+      "alternativ": "cutie cadou personalizata",
+      "descriere_imag": "Păstrează momentele speciale într-o cutie personalizată.",
+      "intervale_ore": [[20, 23]]
+    },
+    {
+      "cale_relativa": "pijama_personalizata.png",
+      "nume_imag": "Pijama personalizată",
+      "alternativ": "pijama cu mesaj",
+      "descriere_imag": "Pentru un somn confortabil și stilat.",
+      "intervale_ore": [[0, 2]]
+    },
+    {
+      "cale_relativa": "pix_gravat.png",
+      "nume_imag": "Pix gravat",
+      "alternativ": "pix personalizat",
+      "descriere_imag": "Un cadou profesional și elegant.",
+      "intervale_ore": [[6, 11]]
+    },
+    {
+      "cale_relativa": "tablou_cuplu.png",
+      "nume_imag": "Tablou cuplu personalizat",
+      "alternativ": "tablou personalizat cuplu",
+      "descriere_imag": "Decor romantic pentru serile în doi.",
+      "intervale_ore": [[20, 23]]
+    }
+  ]
+}
