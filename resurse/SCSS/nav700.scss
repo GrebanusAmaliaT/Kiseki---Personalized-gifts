@@ -1,0 +1,165 @@
+#meniumic{
+    display:block !important;
+
+    @for $i from 1 through 3 {
+        .bara#{$i} {
+            width: 100%;
+            height: 5px;
+            background-color: white;
+            position: absolute;
+            left: 0;
+            transition: 0.3s;
+            animation: menuButtonAnimation#{$i} 2s ease $i * 300ms;  // Setează delay-ul succesiv
+        }
+    }
+
+    >img{
+        height:40px;
+        display:block;
+    }
+}
+
+nav {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+}
+
+.menu-container {
+    width: 40px;
+    height: 30px;
+    position: relative;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.bara1 { top: 0; }
+.bara2 { top: 50%; transform: translateY(-50%); }
+.bara3 { bottom: 0; }
+
+@keyframes menuButtonAnimation1 {
+0% {
+    transform: scale(0.5);
+    opacity: 0.5;
+    background-color: orange;
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+}
+50% {
+    clip-path: none;
+    border-radius: 50%;
+    transform: scale(2);
+    opacity: 2;
+    background-color: yellow;
+}
+100% {
+    clip-path: none;
+    transform: scale(1);
+    opacity: 1;
+    background-color: white;
+}
+}
+@keyframes menuButtonAnimation2 {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0.5;
+        background-color: pink;
+        clip-path: circle(50%);
+        transform: scale(0.5);
+    }
+    50% {
+        clip-path: ellipse(80% 50%);
+        transform: rotate(180deg);
+        opacity: 1;
+        background-color: green;
+        transform: scale(2);
+    }
+    100% {
+        transform: rotate(360deg);
+        opacity: 1;
+        background-color: white;
+        clip-path: none;
+        transform: scale(1);
+    }
+}
+
+@keyframes menuButtonAnimation3 {
+    0% {
+        transform: scale(1);
+        opacity: 0.5;
+        background-color: blue;
+        clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    }
+    50% {
+        clip-path: circle(50%);
+        transform: scale(2);
+        opacity: 1;
+        background-color: red;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+        background-color: white;
+        clip-path: none;
+    }
+}
+ul.meniu{
+    display: none;
+    margin: 0;
+    width:100%;
+    background-color:#f8f8e8;
+
+    display: block; /* Asigură că meniul este vizibil */
+    width: 0; /* Inițial ascuns */
+    overflow: hidden; /* Ascunde conținutul în afara */
+    background-color: #f8f8e8;
+    transition: width 2s ease; /* Tranziție fluidă */
+
+    li{
+        margin:0;
+        width:100%;
+    
+        div.imag-icon{
+            display: block;
+        }
+        
+        div.text-icon{
+            display: none;
+        }
+
+        a{
+            color:#770a1c;
+        }
+    }
+
+    ul li a {
+        display: block;
+        width:100%;
+    }
+}
+
+@keyframes clipsageata {
+    0% {
+    clip-path: polygon(0% 0%, 70% 0%, 100% 50%, 70% 100%, 0% 100%);
+    }
+
+    100% {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    }
+}
+
+#ch-menu:checked+ul.meniu{
+    display:block;
+    position:relative;
+    z-index:10;
+
+    width: 100%; /* Se extinde de la 0 la întreaga lățime */
+    clip-path: polygon(0% 0%, 70% 0%, 100% 50%, 70% 100%, 0% 100%);
+    animation: clipsageata 2s ease 1s forwards; 
+}
+
+main{
+    margin-top:20px;
+}
+
+

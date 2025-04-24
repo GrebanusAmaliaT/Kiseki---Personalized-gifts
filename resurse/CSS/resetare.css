@@ -1,0 +1,41 @@
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: 0;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
+}
+
+b, strong {
+    font-weight: bold; /* Evită ca unele browsere să aplice diferit bold-ul */
+}
+i, em {
+    font-style: italic; /* Normalizează stilul italic */
+}
+
+/*asta este pentru a elimina bullet points și padding-ul implicit) */
+ul, ol {
+    padding: 0;
+    margin: 0;
+}
+
+table {
+    border-collapse: collapse; /* elimin spatiile dintre celule */
+    width: 100%; /* asta am pus-o ca tabelele sa ocupe lățimea completă */
+}
+
+th, td {
+    padding: 0;
+    border: 1px solid transparent; /* Elimină bordurile implicite */
+    text-align: left;
+}
+
+caption {
+    text-align: center;
+    font-style: italic;
+}

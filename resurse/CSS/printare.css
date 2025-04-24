@@ -1,0 +1,87 @@
+@media print {
+    .banner-proiect {
+            position: fixed;
+            top: 0;
+            left: 10%;
+            width: 80%;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            border: 2px dotted black;
+            padding: 10px;
+            background: white;
+            page-break-after: always; /* După banner, începe o pagină nouă */
+        }
+    
+    .banner-proiect::after {
+        content: "";
+        display: block;
+        page-break-after: always;
+    }
+
+    /* Ascunde bannerul de pe paginile următoare */
+    .banner-proiect + * {
+        page-break-before: avoid;
+    }
+    
+    img, video, iframe, .media, a[href="#"] {
+        display: none ;
+    }
+
+    #grid-pagina {
+        display: block !important;
+    }
+
+    a {
+        color: black !important;
+        text-decoration: none !important;
+    }
+
+ 
+    h1 {
+        page-break-before: always;
+        text-align: center;
+        font-size: 2.5em;
+        font-weight: bold;
+        text-decoration: underline;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    /* Ascundere meniu */
+    nav {
+        display: none;
+    }
+    
+    h1::after, footer::before {
+        content: "";
+        display: block;
+        page-break-after: always;
+    }
+
+    @page :left {
+        margin-left: 2.5cm;
+        margin-right: 0.5cm;
+    }
+
+    @page :right {
+        margin-left: 0.5cm;
+        margin-right: 2.5cm;
+    }
+
+    body::before {
+        content: "Ami";
+        position: fixed;
+        bottom: 0cm;
+        right: 5px;
+        width: 100px;
+        height: 2cm;
+        opacity: 0.65;
+        border: 3px double black;
+        text-align: center;
+        line-height: 2cm;
+        font-size: 14px;
+    }
+}

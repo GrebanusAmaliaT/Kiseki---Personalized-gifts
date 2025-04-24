@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ro">
+    <head>
+        <title>KISEKI</title>
+        <meta charset="UTF-8">
+        <meta name="keywords" content="cadouri, personalizate, surpriza, idei de cadouri, unice">
+        <meta name="description" content="Descoperă cadouri personalizate perfecte pentru orice ocazie. Fă-ți cadoul special!">
+        <meta name="author" content="Nume">
+        <%-include("../fragmente/head.ejs")%>
+    </head>
+    <body>
+        <header>
+        <h1 style="color:brown ">Kiseki -  Cadouri Personalizate</h1>
+        </header>
+
+        <%-include("../fragmente/header.ejs")%>
+        
+        <main>
+                <div id="grid-pagina">
+      
+                    <div id="welcome">
+                        <section id="sectiune-acasa">
+                        <h2 style="text-align: center;"> Bine ai venit pe Kiseki!</h2>
+                        <p style="text-align: center;">Descoperă cele mai frumoase <b>cadouri personalizate</b> pentru orice ocazie.</p>
+                        
+                        <p><b>Ip: </b><%- locals.ip %></p>
+                        
+                        <p>Într-o lume plină de momente obișnuite, există gesturi care au puterea de a transforma o zi obișnuită într-una de neuitat. În japoneză, 
+                            <strong>"kiseki" (奇跡)</strong> înseamnă miracol – acele clipe rare și prețioase care ne umplu sufletul de lumină și emoție. 
+                            Iar ce poate fi mai miraculos decât un cadou oferit din inimă?</p> 
+                        <p>Un cadou nu este doar un obiect, ci o emoție împachetată cu grijă. 
+                                Este felul în care spunem „Te prețuiesc”, „M-am gândit la tine”, „Vreau să-ți aduc bucurie.” 
+                                Este acel mic miracol care face ochii să strălucească, buzele să zâmbească și sufletul să simtă căldura celor dragi.</p> 
+                        <p>Fie că este un gest simbolic sau un dar special ales, fiecare cadou poartă în el o parte din sufletul celui care îl oferă. La fel ca un 
+                            <strong>kiseki</strong>, el vine neașteptat, dar rămâne pentru totdeauna în amintire.</p>
+                        <p>Aici, la <strong> Kiseki</strong>, credem în puterea micilor miracole. 
+                            Fiecare cadou pe care îl alegi poate deveni parte dintr-o poveste de neuitat. 
+                            Alege să dăruiești un kiseki – pentru că cele mai frumoase surprize nu sunt întâmplătoare, ci pline de iubire. ✨</p>
+                         </section>
+                    </div>
+                    <div id="grid-galerie">
+                        <%
+                            vect_luni = ["ianuarie", "februarie", "martie", "aprilie", "mai", "iunie", "iulie"];
+                            d = new Date();
+                            luna_curenta = vect_luni[d.getMonth()];
+                        %>
+
+                        <% for (let imag of locals.imagini) { %>
+                            <% if (imag.luni && imag.luni.includes(luna_curenta)) { %>
+                                <picture>
+                                    <source srcset="<%- imag.fisier_mediu %>" media="(max-width: 1000px)">
+                                    <img src="<%- imag.fisier %>" alt="briose">
+                                </picture>
+                            <% } %>
+                        <% } %>
+
+                    </div>
+
+                    <div id="promotii">
+                        <section id="sectiune-produse">
+                            <h2> Produsele Noastre   <i class="fa-solid fa-ribbon" id="icon-static"></i> </h2>
+                            <p class="intro">Cadourile personalizate sunt o modalitate unică de a arăta cât de mult îți pasă.</p>
+                            <div class="produse-container">
+                                <ul class="produse-lista">
+                                    <li><span>☕</span> Căni unice</li>
+                                    <li><span>👕</span> Haine personalizate</li>
+                                    <li><span>🕯️</span> Lumânări decorative</li>
+                                    <li><span>✨</span> Și multe alte surprize!</li>
+                                </ul>
+                            </div>
+                            <h2>Grijă și pasiune în fiecare detaliu</h2>
+                            <p>Fiecare produs pe care îl realizăm este mai mult decât un simplu obiect – 
+                                este o poveste, un sentiment, o amintire prețioasă care prinde viață. 
+                                Punem suflet în fiecare detaliu, pentru că știm că un cadou nu este doar un dar, ci o expresie a iubirii, a grijii și a momentelor de neuitat.</p>
+                            <p>Ne dedicăm fiecărei creații cu pasiune și atenție, alegând cu grijă materialele, lucrând cu precizie și adăugând acea notă specială care face diferența. 
+                                Fie că este vorba despre un mesaj gravat cu emoție, o culoare aleasă perfect sau un design personalizat, 
+                                totul este gândit pentru a aduce bucurie și pentru a transforma un gest simplu într-o emoție profundă.</p>
+                            <figure class="imagine-container">
+                                <picture>
+                                    <source srcset="/resurse/imagini/poza-mica4.jpg" media="(max-width:700px)" />
+                                    <source srcset="/resurse/imagini/poza-mare16.jpg" media="(max-width:1200px)" />
+                                    <img src="/resurse/imagini/poza-medie8.jpg" alt="Cadou personalizat elegant" class="imagine-cadou" />
+                                </picture>
+                                <figcaption>🌟 Amintiri ce durează o viață! 🌟</figcaption>
+                            </figure>
+                            <p>Credem că adevărata valoare a unui cadou stă în intenția din spatele lui. 
+                                De aceea, fiecare produs pe care îl oferim este făcut cu dragoste, 
+                                pentru ca tu să poți dărui nu doar un obiect, ci o parte din sufletul tău. 💖</p>
+                            <blockquote class="citat">„Un cadou personalizat este o amintire prețioasă.”</blockquote>
+                            <div class="buton-container">
+                                <a href="#shop" class="buton-cumpara">🛒 Vezi Produsele</a>
+                            </div>
+                        </section>
+                    </div>
+                    <div id="fig">
+                        <section id="#sectiune-tipuri-cadouri">
+                        <h3 style="text-align: center">Cadouri oferite in familie</h3>
+                        <figure style="text-align: center;">
+                            <picture>
+                                <source srcset="/resurse/imagini/poza-familie4.jpg" media="(max-width:700px)" />
+                                <source srcset="/resurse/imagini/poza-familie16.jpg" media="(max-width:1200px)" />
+                                <img src="/resurse/imagini/poza-familie8.jpg" alt="Cadou personalizat elegant" style="width: 80%; max-width: 1200px; height: auto;" />
+                            </picture>
+                            <figcaption>Nimic mai important decat familie!</figcaption>
+                        </figure>
+                        
+                        <a href="https://www.stargift.ro/categorii/pentru-familie.html?utm_source=chatgpt.com"> Link cu idei de cadouri pe care sa le oferi familiei </a>
+                        
+                        <h3 style="text-align: center" >Cadouri oferite la locul de munca</h3>
+                        <figure style="text-align: center;">
+                            <picture>
+                                <source srcset="/resurse/imagini/poza-munca4.png" media="(max-width:700px)" />
+                                <source srcset="/resurse/imagini/poza-munca16.png" media="(max-width:1200px)" />
+                                <img src="/resurse/imagini/poza-munca8.png" alt="Cadou personalizat elegant" style="width: 80%; max-width: 1200px; height: auto;" />
+                            </picture>
+                            <figcaption>Si biroul e a doua casa!</figcaption>
+                        </figure>
+
+                        <a href="https://www.giftforyou.ro/cadouri-pentru-colegi?utm_source=chatgpt.com"> Link cu idei de cadouri pe care sa le oferi la munca </a>  
+        
+                        <h3 style="text-align: center" >Cadouri oferite prietenilor</h3>
+                        <figure style="text-align: center;">
+                            <picture>
+                                <source srcset="/resurse/imagini/poza-p4.png" media="(max-width:700px)" />
+                                <source srcset="/resurse/imagini/poza-p16.png" media="(max-width:1200px)" />
+                                <img src="/resurse/imagini/poza-p8.png" alt="Cadou personalizat elegant" style="width: 80%; max-width: 1200px; height: auto;" />
+                            </picture>
+                            <figcaption>Prieteni de nepretuit!</figcaption>
+                            <br> 
+                        
+                            <a href="https://pepanza.ro/blog/ce-cadouri-sa-le-oferi-prietenilor-tai-cele-mai-inspirate-idei-sfaturi/?srsltid=AfmBOooKHATepLJPbU-t0wvPS3-w2p-J6cBZhZtwt0MAvYB5kEdAWP8w"> Link cu idei de cadouri pe care sa le oferi prietenilor</a>  
+                            <br> <br>
+                            <i class="fa-solid fa-gift" id="icon-dynamic"></i>
+                            <br> <br>
+                            <a href="#sectiune-produse">Produsele noastre</a>
+                        </figure>
+
+
+                    </section>
+                    </div>                    
+                    <div id="orar">
+                        <h2> Program de lucru</h2>
+                        <table>
+                            <caption>Sâmbătă/Duminică putem discuta telefonic, dar numai până în ora 18:00! La mailuri se răspunde doar luni-vineri. Mulțumim!</caption>
+                            <tr>
+                                <th>Zi</th>
+                                <th>Deschidere</th>
+                                <th>Pauză</th>
+                                <th>Închidere</th>
+                            </tr>
+                            <tr>
+                                <td>Luni - Vineri</td>
+                                <td>10:00</td>
+                                <td>13:00 -14:00</td>
+                                <td>19:00</td>
+                            </tr>
+                            <tr>
+                                <td>Sâmbătă</td>
+                                <td>11:00</td>
+                                <td>13:00 -14:00</td>
+                                <td>16:00</td>
+                            </tr>
+                            <tr>
+                                <td>Duminică</td>
+                                <td>-</td>
+                                <td>Închis</td>
+                                <td>-</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="calendar">
+                        <h2>Martie 2025</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Lun</th> <th>Mar</th> <th>Mie</th> <th>Joi</th> <th>Vin</th> <th>Sâm</th> <th>Dum</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr> <td></td> <td></td> <td></td> <td></td> <td>1</td> <td>2</td> <td>3</td> </tr>
+                                <tr> <td>4</td> <td>5</td> <td>6</td> <td>7</td> <td>8</td> <td>9</td> <td>10</td> </tr>
+                                <tr> <td>11</td> <td>12</td> <td>13</td> <td>14</td> <td>15</td> <td>16</td> <td>17</td> </tr>
+                                <tr> <td>18</td> <td>19</td> <td>20</td> <td>21</td> <td>22</td> <td>23</td> <td>24</td> </tr>
+                                <tr> <td>25</td> <td>26</td> <td>27</td> <td>28</td> <td>29</td> <td>30</td> <td>31</td> </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            <div id="intrebari">
+                <section id="sectiune-intrebari">
+                <h2>Întrebări frecvente</h2>
+                <details>
+                    <summary>🎁 Cum pot plasa o comandă?</summary>
+                    <p>Pentru a plasa o comandă, trebuie să adaugi produsul în coșul de cumpărături, să completezi detaliile și să finalizezi plata.</p>
+                    <p>Gândește-te la noi ca la spiridușii lui Moș Crăciun, dar activi tot anul! Tu alegi cadoul, noi ne ocupăm de restul. Ușor, rapid și fără stres. 😊</p>
+                    <p>Dacă ai nevoie de ajutor, ne poți contacta și îți oferim recomandări personalizate. Practic, suntem acel prieten care are mereu idei bune de cadouri! 🎀</p>
+                </details>
+                <details>
+                    <summary>💳 Care sunt opțiunile de plată?</summary>
+                    <p>Acceptăm plata cu cardul, plata ramburs sau transfer bancar. Detalii complete sunt disponibile pe pagina de checkout.</p>
+                    <p>Fie că alegi să plătești online sau la livrare, cert e că cineva va fi foarte fericit când va primi cadoul tău. Și cine știe? Poate îți va răspunde cu un cadou la fel de frumos! 😉</p>
+                    <p>Ah, și nu-ți face griji! Site-ul nostru este 100% sigur, așa că banii tăi sunt în siguranță – la fel ca și surpriza pe care o pregătești! 🎁</p>
+                </details>
+                <details>
+                    <summary>🚚 Care este termenul de livrare?</summary>
+                    <p>Termenul de livrare este între 2 și 5 zile lucrătoare, în funcție de produsul comandat și de locația ta.</p>
+                    <p>Știm că așteptarea poate fi grea, dar crede-ne, merită! În plus, ai ocazia perfectă să îți creezi un mic moment de anticipare. 😍</p>
+                    <p>Dacă ai nevoie de un cadou super rapid, îți recomandăm să verifici opțiunile de livrare expres. Suntem aici să te salvăm și pe ultima sută de metri! ⏳</p>
+                </details>
+                <details>
+                    <summary>📦 Ce fac dacă vreau să returnez un produs?</summary>
+                    <p>Ne dorim ca fiecare cadou să fie perfect, dar în cazul în care există vreo problemă, poți returna produsul conform politicii noastre de retur.</p>
+                    <p>Tot ce trebuie să faci este să ne contactezi și vom găsi împreună cea mai bună soluție. Promitem că nu te lăsăm singur(ă) în această misiune! 💌</p>
+                    <p>Și da, știm că despărțirile sunt grele, dar uneori un alt cadou este alegerea mai potrivită! 😄</p>
+                </details>
+                <details>
+                    <summary>🎨 Pot personaliza cadoul ales?</summary>
+                    <p>Desigur! Avem o gamă variată de produse personalizabile. Poți adăuga nume, mesaje speciale, inițiale sau chiar imagini. Fiecare cadou devine astfel unic și de neuitat!</p>
+                    <p>În plus, dacă ai o idee mai specială, scrie-ne! Suntem mereu deschiși la propuneri creative. Până la urmă, ce poate fi mai frumos decât un cadou făcut special pentru cineva drag? 🥰</p>
+                </details>
+                <details>
+                    <summary>🎁 Oferiți împachetare cadou?</summary>
+                    <p>Sigur că da! Cadourile nu sunt doar despre conținut, ci și despre emoția descoperirii. Oferim servicii de împachetare elegante, astfel încât surpriza să fie completă. 🎀</p>
+                    <p>Poți alege din mai multe tipuri de ambalaje și panglici, iar dacă vrei să adaugi și un mesaj scris de mână, lasă-ne detaliile în comentarii la comandă. ❤️</p>
+                </details>
+                <details>
+                    <summary>🎊 Pot trimite cadoul direct la destinatar?</summary>
+                    <p>Da, și este chiar o idee excelentă! Dacă vrei să faci o surpriză cu adevărat specială, putem livra cadoul direct destinatarului.</p>
+                    <p>Pentru un plus de emoție, poți adăuga și un mesaj personalizat. Asta înseamnă că persoana dragă se va bucura de cadou fără să bănuiască nimic înainte! ✨</p>
+                </details>
+                <h2>Fun facts </h2>
+                <details>
+                    <summary>🌏 Tradiții de oferit cadouri în Asia</summary>
+                    <details>
+                        <summary>🎎 Japonia</summary>
+                        <p>În Japonia, oferirea de cadouri este o adevărată artă! Există două sezoane principale pentru cadouri: <strong>O-chugen</strong> (vara) și <strong>O-seibo</strong> (iarna), când oamenii oferă daruri pentru a-și arăta recunoștința.</p>
+                        <p>Dacă primești un cadou, este politicos să refuzi de câteva ori înainte de a-l accepta. De asemenea, numărul de obiecte oferite trebuie evitat în multipli de patru, deoarece „patru” sună similar cu „moarte” în japoneză. 🎁</p>
+                    </details>
+                    <details>
+                        <summary>🎀 Coreea de Sud</summary>
+                        <p>Ambalajul este la fel de important ca și cadoul! Se folosesc țesături speciale numite <strong>bojagi</strong>, iar culorile au semnificații specifice: roșul și rozul aduc noroc, în timp ce albul este evitat.</p>
+                        <p>Nu dărui pantofi persoanei iubite, deoarece legenda spune că astfel va fugi de tine! 🏃‍♂️💨</p>
+                    </details>
+                    <details>
+                        <summary>🧧 China</summary>
+                        <p>Unele cadouri sunt considerate ghinioniste. Nu oferi niciodată un ceas (*zhōng*), deoarece sună similar cu „sfârșitul” în chineză. În schimb, fructele scumpe, cum ar fi portocalele și merele, sunt considerate norocoase. 🍊🍏</p>
+                    </details>
+                    <details>
+                        <summary>🎨 India</summary>
+                        <p>Cadourile sunt oferite cu ambele mâini, ca semn de respect. Evită obiectele din piele dacă destinatarul este vegetarian și nu oferi cadouri albe sau negre, deoarece sunt asociate cu doliul.</p>
+                        <p>Dacă primești un cadou, nu-l deschide imediat în fața celui care ți l-a dat – e considerat nepoliticos! 🎁</p>
+                    </details>
+                </details>
+                <details>
+                    <summary>🌍 Tradiții de oferit cadouri în Europa</summary>
+                    <details>
+                        <summary>🇳🇱 Olanda</summary>
+                        <p>Copiii își găsesc cadourile lăsate de Moș Nicolae în pantofi! Această tradiție este foarte veche și are loc în fiecare an pe 5 decembrie. 🎁</p>
+                    </details>
+                    <details>
+                        <summary>🇪🇸 Spania</summary>
+                        <p>Cadourile de Crăciun sunt oferite pe <strong>6 ianuarie</strong> de <em>Los Reyes Magos</em> (Cei Trei Magi), nu de Moș Crăciun. Copiii își lasă pantofii la ușă, iar dacă au fost cuminți, primesc dulciuri. Dacă nu... primesc cărbuni! 🎄</p>
+                    </details>
+                    <details>
+                        <summary>🇫🇷 Franța</summary>
+                        <p>Ambalajul trebuie să fie impecabil! Un cadou neîmpachetat sau împachetat neglijent este considerat lipsă de respect. De asemenea, nu dărui crizanteme – sunt asociate cu înmormântările! 🏵️</p>
+                    </details>
+                    <details>
+                        <summary>🇩🇪 Germania</summary>
+                        <p>Dacă îți serbezi ziua de naștere, trebuie să fii tu cel care oferă un cadou sau măcar o masă invitaților. Prietenii îți vor ura „Alles Gute zum Geburtstag!” și îți vor aduce flori sau vin. 🍷🌸</p>
+                    </details>
+                </details>
+                <details>
+                    <summary>🌎 Tradiții de oferit cadouri în America</summary>
+                
+                    <details>
+                        <summary>🇺🇸 Statele Unite</summary>
+                        <p>Cadourile sunt o parte esențială a tuturor sărbătorilor. În unele familii, există regula „deschidem cadourile pe rând, unul câte unul” pentru a prelungi bucuria. 🎊</p>
+                    </details>
+    
+                    <details>
+                        <summary>🇲🇽 Mexic</summary>
+                        <p>La o <strong>quinceañera</strong> (aniversarea de 15 ani a unei fete), se oferă cadouri simbolice, cum ar fi o păpușă sau o coroană, pentru a marca trecerea la maturitate. 👑</p>
+                    </details>
+                
+                    <details>
+                        <summary>🇧🇷 Brazilia</summary>
+                        <p>Prieteni își oferă cadouri simbolice tot timpul anului. Tradiția „Amigo Secreto” (Secret Santa) este extrem de populară, dar există și o variantă amuzantă numită „Amigo da Onça”, unde se dau cadouri în glumă! 😂</p>
+                    </details>
+                
+                    <details>
+                        <summary>🇦🇷 Argentina</summary>
+                        <p>Când primești un cadou, este politicos să-l deschizi imediat și să mulțumești pe loc. Spre deosebire de alte culturi, acceptarea imediată este un semn de apreciere sinceră! 🥰</p>
+                    </details>
+                </details>
+                <p><img src="/resurse/imagini/culturi.jpg" alt="culturi" style="max-width: 100%; height: auto; display: block;"></p>
+
+                <section id="mathml-calcul-pret">
+                    <h2>~!Serviciile de ambalare specială se plătesc separat!~</h2>
+
+                    <p> <strong> Pentru calcularea prețului total:</strong> </p>
+                    <!--BONUS Formula MathML pentru calculul prețului total -->
+                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                        <mrow>
+                            <mi>P</mi>
+                            <mo>=</mo>
+                            <mi>P₀</mi>
+                            <mo>+</mo>
+                            <mi>Cₐ</mi>
+                            <mo>*</mo>
+                            <mi>n</mi>
+                        </mrow>
+                    </math>
+                    <math>  <mrow> <mtext style="text-align:center; "> unde: </mtext></mrow> </math> 
+                    <math>
+                        <mrow>
+                            <mi>P₀</mi>
+                            <mo>:</mo>
+                            <mtext> Prețul produselor din coș </mtext>
+                        </mrow>
+                        <mrow>
+                            <mi>n</mi>
+                            <mo>:</mo>
+                            <mtext> Numărul de obiecte comandate </mtext>
+                        </mrow>
+                        <mrow>
+                            <mi>Cₐ</mi>
+                            <mo>:</mo>
+                            <mtext> Costul impachetarii unui produs </mtext>
+                        </mrow>
+                        <mrow>
+                            <mi>P</mi>
+                            <mo>:</mo>
+                            <mtext> Prețul final al cadoului </mtext>
+                        </mrow>
+                    </math>
+
+                    <p> <strong> De exemplu, dacă: </strong> </p>
+                    <ul>
+                        <li>Prețul de bază este 150 RON (P₀ = 150)</li>
+                        <li>Costul ambalajului este 5 RON (Cₐ = 5)</li>
+                        <li>Numărul de obiecte comandate este 3 (n = 3)</li>
+                    </ul>
+        
+                    <p><strong> Atunci, prețul total va fi: </strong> </p>
+                    <p><strong>P = P₀ + Cₐ* n</strong></p>
+
+                    <p><strong>P = 150 + 5 * 3 = 150 + 15 = 165 RON</strong></p>
+                </section>
+
+            </section>
+            </div>
+            
+            <div id="video">
+                <section id="sectiune-video">
+                    <h3>Ai nevoie de idei de cadouri pentru paște? </h3>  
+            <!-- Iframe unde vor apărea videoclipurile -->
+            <iframe name="videoFrame" src="https://www.youtube.com/embed/0UgnIl3M2Pk"></iframe>
+            
+            <div class="video-buttons">
+                <a href="https://www.youtube.com/embed/0UgnIl3M2Pk" target="videoFrame">Video 1</a>
+                <a href="https://www.youtube.com/embed/JxS5Bs60CF4" target="videoFrame">Video 2</a>
+                <a href="https://www.youtube.com/embed/WAmRsPq9q9I" target="videoFrame">Video 3</a>
+            </div>
+                <br>
+                <h2> Uite cat de usor poti sa impachetezi cadourile: </h2>
+                <video id="video-vtt" controls preload="metadata" poster="./resurse/imagini/impachetare.jpg">
+                    <source src="./resurse/video/videoImpachetare.mp4" type="video/mp4">
+                    <source src="./resurse/video/videoImpachetare.webm" type="video/webm">
+                
+                    <track src="./resurse/video/subtitrare-ro.vtt" kind="subtitles" srclang="ro" label="Română" default>
+                    <track src="./resurse/video/subtitrare-en.vtt" kind="subtitles" srclang="en" label="English">
+                    
+                    Browserul dvs nu suportă tagul video
+                </video>
+            
+        </section> 
+        </div>   
+             
+             <div id="altele">
+                <section id="sectiune-altele">
+                <h2> Pentru cei curioși: </h2>
+                     <embed src="resurse/pdf1.pdf" type="application/pdf">
+                     </section>
+            </div>
+    </div>
+</main> 
+<footer>
+    <%-include("../fragmente/footer.ejs")%>
+</footer>
+
+    </body>
+</html>
