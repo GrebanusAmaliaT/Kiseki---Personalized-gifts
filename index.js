@@ -5,6 +5,7 @@ const sharp=require("sharp");
 const sass=require("sass");
 const pg=require("pg");
 
+
 const Client=pg.Client;
 
 client=new Client({
@@ -52,6 +53,15 @@ for(let folder of vect_foldere){
     if( ! fs.existsSync(caleFolder)){
         fs.mkdirSync(caleFolder);
     }
+}
+const dirMedii = path.join(__dirname, 'resurse/imagini/galerieStatica-medii');
+const dirMici = path.join(__dirname, 'resurse/imagini/galerieStatica-mici');
+
+if (!fs.existsSync(dirMedii)){
+    fs.mkdirSync(dirMedii);
+}
+if (!fs.existsSync(dirMici)){
+    fs.mkdirSync(dirMici);
 }
 
 function compileazaScss(caleScss, caleCss){
@@ -154,17 +164,21 @@ function initImagini(){
 
     let caleAbs=path.join(__dirname,obGlobal.obImagini.cale_galerie);
     let caleAbsMediu=path.join(__dirname,obGlobal.obImagini.cale_galerie, "mediu");
+   
     if (!fs.existsSync(caleAbsMediu))
         fs.mkdirSync(caleAbsMediu);
 
     //for (let i=0; i< vErori.length; i++ )
     for (let imag of vImagini){
-        [numeFis, ext]=imag.fisier.split(".");
-        let caleFisAbs=path.join(caleAbs,imag.fisier);
+        [numeFis, ext]=imag.cale_relativa.split(".");
+        
+        let caleFisAbs=path.join(caleAbs,imag.cale_relativa);
         let caleFisMediuAbs=path.join(caleAbsMediu, numeFis+".webp");
+        
         sharp(caleFisAbs).resize(300).toFile(caleFisMediuAbs);
-        imag.fisier_mediu=path.join("/", obGlobal.obImagini.cale_galerie, "mediu",numeFis+".webp" )
-        imag.fisier=path.join("/", obGlobal.obImagini.cale_galerie, imag.fisier )
+        
+        imag.cale_relativa_mediu=path.join("/", obGlobal.obImagini.cale_galerie, "mediu",numeFis+".webp" )
+        imag.cale_relativa=path.join("/", obGlobal.obImagini.cale_galerie, imag.cale_relativa )
         
     }
     console.log(obGlobal.obImagini)
@@ -241,6 +255,19 @@ app.get("/produse", function(req, res){
 app.get(/^\/resurse\/[a-zA-Z0-9_\/]*$/, function(req,res,next){
     afisareEroare(res,403);
 })
+app.get('/', async (req, res) => {
+    const ora = new Date().getHours();
+    const imaginiAfisate = imaginiValide(ora);
+    await genereazaImagini();
+    res.render('pagini/index', { imagini: imaginiAfisate });
+});
+
+app.get('/galerie', async (req, res) => {
+    const ora = new Date().getHours();
+    const imaginiAfisate = imaginiValide(ora);
+    await genereazaImagini();
+    res.render('pagini/galerie', { imagini: imaginiAfisate });
+});
 
 app.get("/*.ejs", function(req, res, next){
     afisareEroare(res,400);
@@ -262,7 +289,7 @@ app.get("/*", function(req, res, next) {
         }
     });
     }catch(errRandare){
-        if(err.message.startswith("Cannot find module")){
+        if(errRandare.message.startswith("Cannot find module")){
             afisareEroare(res,404);
         }else{
             afisareEroare(res);
@@ -270,6 +297,39 @@ app.get("/*", function(req, res, next) {
 
     }
 })
+console.log("checkpoint 1");
+const galerie = JSON.parse(fs.readFileSync('resurse/json/galerie.json'));
+
+function imaginiValide(oraCurenta) {
+    let imaginiValide = galerie.imagini.filter(img => {
+        return img.intervale_ore.some(interval => oraCurenta >= interval[0] && oraCurenta <= interval[1]);
+    });
+
+    // Trunchiem la cel mai mic număr par
+    if (imaginiValide.length % 2 !== 0) {
+        imaginiValide.pop(); // scoatem una dacă sunt impare
+    }
+
+    return imaginiValide;
+}
+
+
+async function genereazaImagini() {
+    for (const img of galerie.imagini) {
+        const numeFisier = img.cale_relativa;
+        const caleOriginala = path.join(__dirname, 'resurse/imagini/galerieStatica', numeFisier);
+        const caleMedie = path.join(__dirname, 'resurse/imagini/galerieStatica-medii', numeFisier);
+        const caleMica = path.join(__dirname, 'resurse/imagini/galerieStatica-mici', numeFisier);
+
+        if (!fs.existsSync(caleMedie)) {
+            await sharp(caleOriginala).resize(300).toFile(caleMedie);
+        }
+        if (!fs.existsSync(caleMica)) {
+            await sharp(caleOriginala).resize(150).toFile(caleMica);
+        }
+    }
+}
+
 
 app.listen(8080);
 console.log("Serverul a pornit")

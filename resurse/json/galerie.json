@@ -1,103 +1,158 @@
 {
-  "cale_galerie": "resurse/imagini/galerieSatica",
+  "cale_galerie": "resurse/imagini/galerieStatica",
   "imagini": [
     {
       "cale_relativa": "cana_motivationala.png",
       "nume_imag": "Cană cu mesaj motivațional",
       "alternativ": "cana personalizata",
       "descriere_imag": "Începe-ți ziua cu o doză de motivație!",
-      "intervale_ore": [[6, 11]]
+      "intervale_ore": [[5, 11]],
+      "licenta": {
+      "tip": "CC0",
+      "autor": "Amalia"}
     },
     {
       "cale_relativa": "agenda_eleganta.png",
       "nume_imag": "Agendă elegantă",
       "alternativ": "agenda personalizata",
       "descriere_imag": "Un cadou elegant pentru cei organizați.",
-      "intervale_ore": [[6, 11], [16,19]]
+      "intervale_ore": [[7, 13]],
+      "licenta": {
+      "tip": "CC-BY",
+      "autor": "Bonami",
+      "sursa": "https://www.bonami.ro/p/agenda-pentru-evidente-financiare-busy-b-budget-book"}
     },
     {
       "cale_relativa": "tricou_amuzant.png",
       "nume_imag": "Tricou amuzant",
       "alternativ": "tricou personalizat",
       "descriere_imag": "Tricouri perfecte pentru pauza de prânz!",
-      "intervale_ore": [[12, 15]]
+      "intervale_ore": [[10, 16]],
+      "licenta": {
+      "tip": "CC0",
+      "autor": "Amalia"}
     },
     {
       "cale_relativa": "breloc_personalizat.png",
       "nume_imag": "Breloc personalizat",
       "alternativ": "breloc cu mesaj",
       "descriere_imag": "Un cadou mic, dar cu mare impact – brelocul personalizat.",
-      "intervale_ore": [[12, 15]]
+      "intervale_ore": [[10, 17]],
+      "licenta": {
+      "tip": "CC0",
+      "autor": "Amalia"}
     },
+    {
+      "cale_relativa": "tricou_personalizat_mesaj.png",
+      "nume_imag": "Tricou personalizat cu mesaj",
+      "alternativ": "tricou personalizabil",
+      "descriere_imag": "Tricou alb cu spațiu pentru mesaj personalizat.",
+      "intervale_ore": [[12, 17],[18,22]],
+      "licenta": {
+        "tip": "CC-BY",
+        "autor": "PrintBox",
+        "sursa": "https://printbox.ro/produs/tricou-personalizat-cu-o-poza-si-mesaj/"
+      }
+    },    
     {
       "cale_relativa": "rama_foto_cuplu.png",
       "nume_imag": "Rama foto cuplu",
       "alternativ": "rama cuplu",
       "descriere_imag": "Un cadou romantic de după-amiază.",
-      "intervale_ore": [[16, 19]]
+      "intervale_ore": [[12, 20]],
+      "licenta": {
+      "tip": "CC0",
+      "autor": "Amalia"}
     },
     {
       "cale_relativa": "lampa_personalizata.png",
       "nume_imag": "Lampa personalizata",
       "alternativ": "lampa personalizata",
       "descriere_imag": "Creeaza o atmosfera unica cu o lampa personalizata.",
-      "intervale_ore": [[20, 23]]
+      "intervale_ore": [[19, 23]],
+      "licenta": {
+      "tip": "CC0",
+      "autor": "Amalia"}
     },
     {
       "cale_relativa": "perna_chill.png",
       "nume_imag": "Pernă relaxare",
       "alternativ": "perna personalizata",
       "descriere_imag": "Pentru nopți liniștite și vise frumoase.",
-      "intervale_ore": [[0, 2]]
+      "intervale_ore": [[22, 2]],
+      "licenta": {
+      "tip": "CC0",
+      "autor": "Amalia"}
     },
     {
       "cale_relativa": "set_cadou_birou.png",
       "nume_imag": "Set cadou birou",
       "alternativ": "set birou personalizat",
       "descriere_imag": "Ideal pentru începutul zilei la birou.",
-      "intervale_ore": [[6, 11]]
+      "intervale_ore": [[6, 12]],
+      "licenta": {
+      "tip": "CC0",
+      "autor": "Amalia"}
     },
     {
       "cale_relativa": "sticla_personalizata.png",
       "nume_imag": "Sticlă personalizată",
       "alternativ": "sticla personalizata",
       "descriere_imag": "Pentru o hidratare stilată în pauza de prânz.",
-      "intervale_ore": [[12, 15]]
+      "intervale_ore": [[11, 17]],
+      "licenta": {
+      "tip": "CC0",
+      "autor": "Amalia"}
     },
     {
       "cale_relativa": "ceas_personalizat.png",
       "nume_imag": "Ceas personalizat",
       "alternativ": "ceas elegant personalizat",
       "descriere_imag": "Un ceas de perete unic pentru casă sau birou.",
-      "intervale_ore": [[16, 19]]
+      "intervale_ore": [[14, 20]],
+      "licenta": {
+      "tip": "CC0",
+      "autor": "Amalia"}
     },
     {
       "cale_relativa": "cutie_amintiri.png",
       "nume_imag": "Cutie cu amintiri",
       "alternativ": "cutie cadou personalizata",
       "descriere_imag": "Păstrează momentele speciale într-o cutie personalizată.",
-      "intervale_ore": [[20, 23]]
+      "intervale_ore": [[17, 23]],
+      "licenta": {
+      "tip": "CC0",
+      "autor": "Amalia"}
     },
     {
       "cale_relativa": "pijama_personalizata.png",
       "nume_imag": "Pijama personalizată",
       "alternativ": "pijama cu mesaj",
       "descriere_imag": "Pentru un somn confortabil și stilat.",
-      "intervale_ore": [[0, 2]]
+      "intervale_ore": [[22, 2]],
+      "licenta": {
+      "tip": "CC0",
+      "autor": "Amalia"}
     },
     {
       "cale_relativa": "pix_gravat.png",
       "nume_imag": "Pix gravat",
       "alternativ": "pix personalizat",
       "descriere_imag": "Un cadou profesional și elegant.",
-      "intervale_ore": [[6, 11]]
+      "intervale_ore": [[5, 12]],
+      "licenta": {
+      "tip": "CC0",
+      "autor": "Amalia"}
     },
     {
       "cale_relativa": "tablou_cuplu.png",
       "nume_imag": "Tablou cuplu personalizat",
       "alternativ": "tablou personalizat cuplu",
       "descriere_imag": "Decor romantic pentru serile în doi.",
-      "intervale_ore": [[20, 23]]
+      "intervale_ore": [[18, 23]],
+      "licenta": {
+      "tip": "CC0",
+      "autor": "Amalia"}
     }
   ]
 }

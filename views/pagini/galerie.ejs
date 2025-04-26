@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ro">
+    <head>
+        <title>KISEKI</title>
+        <meta charset="UTF-8">
+        <meta name="keywords" content="cadouri, personalizate, surpriza, idei de cadouri, unice">
+        <meta name="description" content="Descoperă cadouri personalizate perfecte pentru orice ocazie. Fă-ți cadoul special!">
+        <meta name="author" content="Nume">
+        <%-include("../fragmente/head.ejs")%>
+    </head>
+    <body>
+        <header>
+        <h1 style="color:brown ">Kiseki -  Cadouri Personalizate</h1>
+        </header>
+
+        <%-include("../fragmente/header.ejs")%>
+    <main>
+      <%- include("../fragmente/galerie-fragment", { imagini: imagini }) %>
+
+    </main>
+
+    <footer>
+    <%- include("../fragmente/footer") %>
+   </footer>
+
+    </body>
+</html>
