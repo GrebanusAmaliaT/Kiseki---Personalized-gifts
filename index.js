@@ -300,7 +300,7 @@ app.get("/*", function(req, res, next) {
         }
     });
     }catch(errRandare){
-        if(errRandare.message.startswith("Cannot find module")){
+        if(errRandare.message.startsWith("Cannot find module")){
             afisareEroare(res,404);
         }else{
             afisareEroare(res);
