@@ -7,6 +7,7 @@
         <meta name="description" content="Descoperă cadouri personalizate perfecte pentru orice ocazie. Fă-ți cadoul special!">
         <meta name="author" content="Nume">
         <%-include("../fragmente/head.ejs")%>
+        <link rel="stylesheet" href="/resurse/CSS/galerieStatica.css" type="text/css">
     </head>
     <body>
         <header>
@@ -15,12 +16,11 @@
 
         <%-include("../fragmente/header.ejs")%>
     <main>
-      <%- include("../fragmente/galerie-fragment", { imagini: imagini }) %>
-
+        <%- include("../fragmente/galerie-fragment", { imagini: imagini }) %>
     </main>
 
     <footer>
-    <%- include("../fragmente/footer") %>
+        <%- include("../fragmente/footer") %>
    </footer>
 
     </body>

@@ -168,7 +168,6 @@ function initImagini(){
     if (!fs.existsSync(caleAbsMediu))
         fs.mkdirSync(caleAbsMediu);
 
-    //for (let i=0; i< vErori.length; i++ )
     for (let imag of vImagini){
         [numeFis, ext]=imag.cale_relativa.split(".");
         
@@ -199,8 +198,24 @@ app.get("/despre", (req, res) => {
     res.render("pagini/despre");
 });
 
-app.get( ["/", "/home", "/index"], function(req, res) {
-    res.render("pagini/index", {ip:req.ip, imagini:obGlobal.obImagini.imagini} );
+
+app.get( ["/", "/home", "/index"], async (req,res) => {
+    console.log("AM INTRAT PE ROUTE /");
+    
+    const ora = new Date().getHours();
+    const imaginiValideCurent = imaginiValide(ora);
+    const imaginiAfisate = imaginiValideCurent;
+    const imaginiAcasaStatic= imaginiValideCurent;
+
+    const imaginiAnimata = selectRandomImages(imaginiValideCurent); 
+
+    await genereazaImagini();
+
+    res.render("pagini/index", {
+        ip:req.ip, 
+        imagini:obGlobal.obImagini.imagini, 
+        imaginiAnimata: imaginiAnimata,
+        imaginiGalerieStatica: imaginiValideCurent } );
 })
 
 app.get("/fisier", function(req,res){
@@ -255,12 +270,7 @@ app.get("/produse", function(req, res){
 app.get(/^\/resurse\/[a-zA-Z0-9_\/]*$/, function(req,res,next){
     afisareEroare(res,403);
 })
-app.get('/', async (req, res) => {
-    const ora = new Date().getHours();
-    const imaginiAfisate = imaginiValide(ora);
-    await genereazaImagini();
-    res.render('pagini/index', { imagini: imaginiAfisate });
-});
+
 
 app.get('/galerie', async (req, res) => {
     const ora = new Date().getHours();
@@ -268,6 +278,7 @@ app.get('/galerie', async (req, res) => {
     await genereazaImagini();
     res.render('pagini/galerie', { imagini: imaginiAfisate });
 });
+
 
 app.get("/*.ejs", function(req, res, next){
     afisareEroare(res,400);
@@ -329,7 +340,16 @@ async function genereazaImagini() {
         }
     }
 }
+function randomEven(min, max) {
+    let num = Math.floor(Math.random() * ((max - min) / 2 + 1)) * 2 + min;
+    return num;
+}
 
+function selectRandomImages(imaginiValide) {
+    const nrImagini = randomEven(6, 12);
+    const imaginiShuffle = [...imaginiValide].sort(() => Math.random() - 0.5);
+    return imaginiShuffle.slice(0, nrImagini);
+}
 
 app.listen(8080);
 console.log("Serverul a pornit")

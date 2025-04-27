@@ -1,0 +1,50 @@
+#imagine-duotone {
+    position: relative;
+    background-image: url('https://tse3.mm.bing.net/th?id=OIP.eRLQzejSpEvb54qwRd0cAgHaJ4&pid=Api');
+    background-size: cover;
+    background-position: center;
+    width: 500px;
+    height: 500px;
+    filter: brightness(90%) grayscale(0);
+    transition: all 1.5s ease;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
+#imagine-duotone::after,
+#imagine-duotone::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    transition: all 1.5s ease;
+}
+
+#imagine-duotone::before {
+    background-color: rgba(255, 223, 186, 0.4); 
+    mix-blend-mode: lighten;
+}
+
+#imagine-duotone::after {
+    background-color: rgba(255, 192, 203, 0.4); 
+    mix-blend-mode: lighten;
+}
+
+#imagine-duotone:hover::before {
+    background-color: rgba(173, 216, 230, 0.4); 
+}
+
+#imagine-duotone:hover::after {
+    background-color: rgba(255, 255, 153, 0.4); 
+}
+
+#container-duotone {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh; 
+    width: 100%;
+    margin: 20px 0;
+}

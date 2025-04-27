@@ -10,7 +10,7 @@
             border: 2px dotted black;
             padding: 10px;
             background: white;
-            page-break-after: always; /* După banner, începe o pagină nouă */
+            page-break-after: always; 
         }
     
     .banner-proiect::after {
@@ -19,7 +19,6 @@
         page-break-after: always;
     }
 
-    /* Ascunde bannerul de pe paginile următoare */
     .banner-proiect + * {
         page-break-before: avoid;
     }
@@ -50,7 +49,6 @@
         height: 100vh;
     }
 
-    /* Ascundere meniu */
     nav {
         display: none;
     }

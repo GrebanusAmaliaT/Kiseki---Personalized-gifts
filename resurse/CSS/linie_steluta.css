@@ -1,0 +1,24 @@
+.linie-cu-steluta {
+    border: none;
+    height: 4px;
+    width: 90%;
+    margin: 50px auto;
+    border-radius: 10px;
+    background: linear-gradient(to right, black 0 50%, white 50% 50%, black 50% 100%);
+    position: relative;
+    overflow: visible; /* asta ca steaua sa poata iesi in afara steaua*/
+    z-index: 1;
+}
+
+.linie-cu-steluta::after {
+    content: "✻";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.8);
+    font-size: 20px;
+    color: grey;
+    background-color: white;
+    padding: 5px;
+    z-index: 2; 
+}

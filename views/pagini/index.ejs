@@ -10,7 +10,10 @@
     </head>
     <body>
         <header>
-        <h1 style="color:brown ">Kiseki -  Cadouri Personalizate</h1>
+            <div id="container-reflexie"> 
+            <h1 id="text" style="color:brown ">Kiseki -  Cadouri Personalizate</h1>
+            <h1 id="text-reflectat" style="color:brown ">Kiseki -  Cadouri Personalizate</h1>
+        </div>    
         </header>
 
         <%-include("../fragmente/header.ejs")%>
@@ -31,6 +34,8 @@
                         <p>Un cadou nu este doar un obiect, ci o emoție împachetată cu grijă. 
                                 Este felul în care spunem „Te prețuiesc”, „M-am gândit la tine”, „Vreau să-ți aduc bucurie.” 
                                 Este acel mic miracol care face ochii să strălucească, buzele să zâmbească și sufletul să simtă căldura celor dragi.</p> 
+                        
+                        
                         <p>Fie că este un gest simbolic sau un dar special ales, fiecare cadou poartă în el o parte din sufletul celui care îl oferă. La fel ca un 
                             <strong>kiseki</strong>, el vine neașteptat, dar rămâne pentru totdeauna în amintire.</p>
                         <p>Aici, la <strong> Kiseki</strong>, credem în puterea micilor miracole. 
@@ -38,23 +43,7 @@
                             Alege să dăruiești un kiseki – pentru că cele mai frumoase surprize nu sunt întâmplătoare, ci pline de iubire. ✨</p>
                          </section>
                     </div>
-                    <div id="grid-galerie">
-                        <%
-                            vect_luni = ["ianuarie", "februarie", "martie", "aprilie", "mai", "iunie", "iulie"];
-                            d = new Date();
-                            luna_curenta = vect_luni[d.getMonth()];
-                        %>
-
-                        <% for (let imag of locals.imagini) { %>
-                            <% if (imag.luni && imag.luni.includes(luna_curenta)) { %>
-                                <picture>
-                                    <source srcset="<%- imag.fisier_mediu %>" media="(max-width: 1000px)">
-                                    <img src="<%- imag.fisier %>" alt="briose">
-                                </picture>
-                            <% } %>
-                        <% } %>
-
-                    </div>
+                    
 
                     <div id="promotii">
                         <section id="sectiune-produse">
@@ -68,6 +57,18 @@
                                     <li><span>✨</span> Și multe alte surprize!</li>
                                 </ul>
                             </div>
+                            <p><%= imaginiAnimata ? "Exista imaginiAnimata" : "Nu exista imaginiAnimata" %></p>
+
+                            <% if (imaginiAnimata.length > 0) { %>
+                                <div class="galerie-animata">
+                                  <% imaginiAnimata.forEach((imagine, idx) => { %>
+                                    <img src="/resurse/imagini/galerieStatica/<%= imagine.cale_relativa %>" 
+                                         alt="<%= imagine.alternativ || imagine.nume_imag %>"
+                                         class="slide">
+                                  <% }) %>
+                                </div>
+                              <% } %>
+                              
                             <h2>Grijă și pasiune în fiecare detaliu</h2>
                             <p>Fiecare produs pe care îl realizăm este mai mult decât un simplu obiect – 
                                 este o poveste, un sentiment, o amintire prețioasă care prinde viață. 
@@ -77,9 +78,9 @@
                                 totul este gândit pentru a aduce bucurie și pentru a transforma un gest simplu într-o emoție profundă.</p>
                             <figure class="imagine-container">
                                 <picture>
-                                    <source srcset="/resurse/imagini/poza-mica4.jpg" media="(max-width:700px)" />
-                                    <source srcset="/resurse/imagini/poza-mare16.jpg" media="(max-width:1200px)" />
-                                    <img src="/resurse/imagini/poza-medie8.jpg" alt="Cadou personalizat elegant" class="imagine-cadou" />
+                                    <source srcset="/resurse/imagini/diverse/poza-mica4.jpg" media="(max-width:700px)" />
+                                    <source srcset="/resurse/imagini/diverse/poza-mare16.jpg" media="(max-width:1200px)" />
+                                    <img src="/resurse/imagini/diverse/poza-medie8.jpg" alt="Cadou personalizat elegant" class="imagine-cadou" />
                                 </picture>
                                 <figcaption>🌟 Amintiri ce durează o viață! 🌟</figcaption>
                             </figure>
@@ -90,6 +91,11 @@
                             <div class="buton-container">
                                 <a href="#shop" class="buton-cumpara">🛒 Vezi Produsele</a>
                             </div>
+                           
+                            <div id="container-duotone">
+                                <div id="imagine-duotone"></div>
+                            </div>                            
+
                         </section>
                     </div>
                     <div id="fig">
@@ -97,9 +103,9 @@
                         <h3 style="text-align: center">Cadouri oferite in familie</h3>
                         <figure style="text-align: center;">
                             <picture>
-                                <source srcset="/resurse/imagini/poza-familie4.jpg" media="(max-width:700px)" />
-                                <source srcset="/resurse/imagini/poza-familie16.jpg" media="(max-width:1200px)" />
-                                <img src="/resurse/imagini/poza-familie8.jpg" alt="Cadou personalizat elegant" style="width: 80%; max-width: 1200px; height: auto;" />
+                                <source srcset="/resurse/imagini/diverse/poza-familie4.jpg" media="(max-width:700px)" />
+                                <source srcset="/resurse/imagini/diverse/poza-familie16.jpg" media="(max-width:1200px)" />
+                                <img src="/resurse/imagini/diverse/poza-familie8.jpg" alt="Cadou personalizat elegant" style="width: 80%; max-width: 1200px; height: auto;" />
                             </picture>
                             <figcaption>Nimic mai important decat familie!</figcaption>
                         </figure>
@@ -109,9 +115,9 @@
                         <h3 style="text-align: center" >Cadouri oferite la locul de munca</h3>
                         <figure style="text-align: center;">
                             <picture>
-                                <source srcset="/resurse/imagini/poza-munca4.png" media="(max-width:700px)" />
-                                <source srcset="/resurse/imagini/poza-munca16.png" media="(max-width:1200px)" />
-                                <img src="/resurse/imagini/poza-munca8.png" alt="Cadou personalizat elegant" style="width: 80%; max-width: 1200px; height: auto;" />
+                                <source srcset="/resurse/imagini/diverse/poza-munca4.png" media="(max-width:700px)" />
+                                <source srcset="/resurse/imagini/diverse/poza-munca16.png" media="(max-width:1200px)" />
+                                <img src="/resurse/imagini/diverse/poza-munca8.png" alt="Cadou personalizat elegant" style="width: 80%; max-width: 1200px; height: auto;" />
                             </picture>
                             <figcaption>Si biroul e a doua casa!</figcaption>
                         </figure>
@@ -121,9 +127,9 @@
                         <h3 style="text-align: center" >Cadouri oferite prietenilor</h3>
                         <figure style="text-align: center;">
                             <picture>
-                                <source srcset="/resurse/imagini/poza-p4.png" media="(max-width:700px)" />
-                                <source srcset="/resurse/imagini/poza-p16.png" media="(max-width:1200px)" />
-                                <img src="/resurse/imagini/poza-p8.png" alt="Cadou personalizat elegant" style="width: 80%; max-width: 1200px; height: auto;" />
+                                <source srcset="/resurse/imagini/diverse/poza-p4.png" media="(max-width:700px)" />
+                                <source srcset="/resurse/imagini/diverse/poza-p16.png" media="(max-width:1200px)" />
+                                <img src="/resurse/imagini/diverse/poza-p8.png" alt="Cadou personalizat elegant" style="width: 80%; max-width: 1200px; height: auto;" />
                             </picture>
                             <figcaption>Prieteni de nepretuit!</figcaption>
                             <br> 
@@ -227,6 +233,9 @@
                     <p>Da, și este chiar o idee excelentă! Dacă vrei să faci o surpriză cu adevărat specială, putem livra cadoul direct destinatarului.</p>
                     <p>Pentru un plus de emoție, poți adăuga și un mesaj personalizat. Asta înseamnă că persoana dragă se va bucura de cadou fără să bănuiască nimic înainte! ✨</p>
                 </details>
+
+                <hr class="linie-cu-steluta">
+
                 <h2>Fun facts </h2>
                 <details>
                     <summary>🌏 Tradiții de oferit cadouri în Asia</summary>
@@ -292,7 +301,7 @@
                         <p>Când primești un cadou, este politicos să-l deschizi imediat și să mulțumești pe loc. Spre deosebire de alte culturi, acceptarea imediată este un semn de apreciere sinceră! 🥰</p>
                     </details>
                 </details>
-                <p><img src="/resurse/imagini/culturi.jpg" alt="culturi" style="max-width: 100%; height: auto; display: block;"></p>
+                <p><img src="/resurse/imagini/diverse/culturi.jpg" alt="culturi" style="max-width: 100%; height: auto; display: block;"></p>
 
                 <section id="mathml-calcul-pret">
                     <h2>~!Serviciile de ambalare specială se plătesc separat!~</h2>
@@ -380,13 +389,16 @@
                 <section id="sectiune-altele">
                 <h2> Pentru cei curioși: </h2>
                      <embed src="resurse/pdf1.pdf" type="application/pdf">
-                     </section>
+                </section>
             </div>
 
-            <%- include("../fragmente/galerie-fragment", { imagini: imagini }) %>
-  
+            <div id="galerie_statica">
+                <h2 style=" text-align: center; font-size: 50px; color: var(--culoare-fundal-principal)"> Galerie de produse recomandate </h2>
+                <%- include("../fragmente/galerie-fragment", { imagini: imaginiGalerieStatica}) %>
+            </div>
     </div>
-</main> 
+</main>
+
 <footer>
     <%-include("../fragmente/footer.ejs")%>
 </footer>

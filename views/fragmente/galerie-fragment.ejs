@@ -16,10 +16,12 @@
     %>
       <% if (esteNegru && imgIndex < imagini.length) {
            let imagine = imagini[imgIndex]; %>
+           
         <figure class="imagine">
           <picture>
             <source media="(max-width: 600px)" srcset="/resurse/imagini/galerieStatica-mici/<%= imagine.cale_relativa %>">
             <source media="(max-width: 1000px)" srcset="/resurse/imagini/galerieStatica-medii/<%= imagine.cale_relativa %>">
+            
             <img src="/resurse/imagini/galerieStatica/<%= imagine.cale_relativa %>" 
                  alt="<%= imagine.alternativ || imagine.nume_imag %>" 
                  title="<%= imagine.descriere_imag %>">
@@ -34,7 +36,7 @@
                 <a href="<%= imagine.licenta.sursa %>" target="_blank">sursă</a>
                 </small>
             <% } %>
-            
+
           </figcaption>
 
         </figure>
