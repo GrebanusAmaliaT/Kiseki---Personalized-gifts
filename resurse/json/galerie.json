@@ -79,7 +79,7 @@
       "nume_imag": "Pernă relaxare",
       "alternativ": "perna personalizata",
       "descriere_imag": "Pentru nopți liniștite și vise frumoase.",
-      "intervale_ore": [[22, 2]],
+      "intervale_ore": [[22, 2] ],
       "licenta": {
       "tip": "CC0",
       "autor": "Amalia"}
@@ -89,7 +89,7 @@
       "nume_imag": "Set cadou birou",
       "alternativ": "set birou personalizat",
       "descriere_imag": "Ideal pentru începutul zilei la birou.",
-      "intervale_ore": [[6, 12]],
+      "intervale_ore": [[6, 12], [22,2] ],
       "licenta": {
       "tip": "CC0",
       "autor": "Amalia"}

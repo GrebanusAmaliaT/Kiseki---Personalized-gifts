@@ -110,18 +110,22 @@ header {
     outline: var(--outline-standard) solid black;
     padding: var(--padding-standard);
 }
-
+/*task etapa 5*/
 #orar {
     text-align: center;
     border: var(--border-mic) inset var(--culoare-border);
     padding: var(--padding-mic);
-    overflow-x: auto; /* Scrollbar doar pentru tabel */
+    overflow-x: auto;
+    overflow-y: auto;
+    display:block;
 }
 
 #orar table {
-    width: 70%;
+    width: 100%;
     border: var(--border-tabel) solid #901a2a;
-    place-self: center;
+    margin: 0 auto;
+    border-collapse: collapse;
+    min-width: 400px; /* adăugăm o lățime minimă */
 }
 
 #orar caption {
@@ -158,6 +162,49 @@ header {
     transition: outline 0.5s ease-in-out;
 }
 
+/* TABELUL RESPONSIVE*/
+@media screen and (max-width: 768px) {
+    #orar table {
+        display: block;
+        width: 100%;
+    }
+}
+
+/*--------------------------------*/
+#transpus table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+ 
+  #transpus thead, #transpus tbody, #transpus tr {
+    display: table-row-group;
+    float: none;
+  }
+  
+  #transpus th, #transpus td {
+    display: table-cell;
+    border: 1px solid black;
+    padding: 0.5em;
+  }
+
+
+@media screen and (max-width: 768px) {
+#transpus thead, #tranpus tbody,#transpus tr {
+	display: block; 
+	float: left; 
+}
+#transpus th,#transpus td { 
+	display: block; 
+	border:1px solid black;
+	padding:0.3em;
+}
+#transpus td+td, #transpus th+th { 
+	border-top:none;
+}
+}
+/*-------------------------*/
+
 #sectiune-altele {
     display: flex;
     flex-direction: column;
@@ -171,40 +218,6 @@ header {
 
 figcaption {
     text-align: center;
-}
-
-#calendar {
-    text-align: center;
-    border: 3px solid black;
-    background: var(--culoare-header);;
-    display: flex;
-    flex-direction: column;
-}
-
-#calendar table {
-    width: 100%;
-    table-layout: fixed; 
-}
-
-#calendar th, #calendar td {
-    border: 2px solid #9a1d1d;
-    text-align: center;
-    font-size: var(--font-mediu);
-}
-
-#calendar th {
-    background: #6f5d49;
-    color: white;
-}
-
-#calendar td {
-    background: var(--culoare-deschisa);
-}
-
-#calendar td:hover {
-    background: #6f5d49;
-    color: white;
-    cursor: pointer;
 }
 
 
@@ -264,13 +277,6 @@ iframe {
     html {
         font-size: 14px;
     }
-
-    #orar {
-        overflow-x: auto;
-        display: block;
-        white-space: nowrap;
-    }
-
     body { --spatiere-pagina: var(--spatiere-pagina-mici); }
 
     #grid-pagina {
@@ -421,7 +427,53 @@ iframe {
         transform: scale(1.2);
     }
 }
+/* taskuri etapa 5*/
+.text-coloane {
+    column-count: 2;
+    column-gap: 2rem;
+    column-rule: 2px solid var(--culoare-border); 
 
+    @media screen and (max-width: 992px) { 
+        column-count: 1;
+    }
+    @media screen and (max-width: 576px) { 
+        column-count: 1;
+    }
+}
+/*--------------------*/
+
+::selection {
+    background-color: var(--culoare-header); 
+    color: var(--culoare-fundal-principal);
+}
+
+/*-------------------*/
+.container-text-animat {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    height: 3rem; 
+}
+
+.text-animat {
+    white-space: nowrap;
+    display: inline-block;
+    position: absolute;
+    animation: derulare 20s linear infinite;
+    font-size: 2rem;
+    color: var(--culoare-linkuri); 
+}
+
+@keyframes derulare {
+    0% {
+        left: 100%;
+    }
+    100% {
+        left: -100%;
+    }
+}
+
+/*---------------------*/
 #mathml-calcul-pret {
     background: var(--culoare-header); 
     padding: 1.5rem;

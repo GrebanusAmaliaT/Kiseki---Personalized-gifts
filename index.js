@@ -88,8 +88,19 @@ function compileazaScss(caleScss, caleCss){
 
     let numeFisCss=path.basename(caleCss);
     if (fs.existsSync(caleCss)){
-        fs.copyFileSync(caleCss, path.join(obGlobal.folderBackup, "resurse/css",numeFisCss ))// +(new Date()).getTime()
+        let timestamp = Date.now(); 
+        let numeFisierFaraExtensie = numeFisCss.split(".")[0]; //a 
+        let extensie = path.extname(caleCss); //  .css
+
+        let caleBackupFisier = path.join(
+            obGlobal.folderBackup,
+            "resurse/css",
+            `${numeFisierFaraExtensie}_${timestamp}${extensie}`
+        );
+    
+    fs.copyFileSync(caleCss, caleBackupFisier);
     }
+
     rez=sass.compile(caleScss, {"sourceMap":true});
     fs.writeFileSync(caleCss,rez.css)
     //console.log("Compilare SCSS",rez);
@@ -316,9 +327,9 @@ function imaginiValide(oraCurenta) {
         return img.intervale_ore.some(interval => oraCurenta >= interval[0] && oraCurenta <= interval[1]);
     });
 
-    // Trunchiem la cel mai mic număr par
+    // Trunchiez la cel mai mic nr par
     if (imaginiValide.length % 2 !== 0) {
-        imaginiValide.pop(); // scoatem una dacă sunt impare
+        imaginiValide.pop(); // scoat una daca nr e impar
     }
 
     return imaginiValide;

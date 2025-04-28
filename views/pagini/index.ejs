@@ -23,7 +23,12 @@
       
                     <div id="welcome">
                         <section id="sectiune-acasa">
-                        <h2 style="text-align: center;"> Bine ai venit pe Kiseki!</h2>
+
+                        <div class="container-custom">
+                            <h1> Bine ai venit pe Kiseki! </h1>
+                            <button class="btn btn-custom"> Ne bucuram sa te avem alaturi! </button>
+                          </div>
+                          
                         <p style="text-align: center;">Descoperă cele mai frumoase <b>cadouri personalizate</b> pentru orice ocazie.</p>
                         
                         <p><b>Ip: </b><%- locals.ip %></p>
@@ -35,16 +40,59 @@
                                 Este felul în care spunem „Te prețuiesc”, „M-am gândit la tine”, „Vreau să-ți aduc bucurie.” 
                                 Este acel mic miracol care face ochii să strălucească, buzele să zâmbească și sufletul să simtă căldura celor dragi.</p> 
                         
-                        
+                                <div id="transpus">
+                                    <h2>Cadouri și emoțiile transmise</h2>
+                                    
+                                    <div id="transpus">
+                                        <table>
+                                           
+                                                <tr>
+                                                    <th>Emoție transmisă</th>
+                                                    <th>Tip mesaj</th>
+                                                    <th>Ocazie specială</th>
+                                                    <th>Dedicatie</th>
+                                                </tr>
+                                            
+                                                <tr>
+                                                    <td>Recunoștință</td>
+                                                    <td>mulțumire</td>
+                                                    <td>Ziua profesorului</td>
+                                                    <td>"Mulțumesc pentru tot!"</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Dragoste</td>
+                                                    <td>romantic</td>
+                                                    <td>Ziua Îndrăgostiților</td>
+                                                    <td>"Te iubesc din tot sufletul"</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Curaj</td>
+                                                    <td>motivațional</td>
+                                                    <td>Absolvire</td>
+                                                    <td>"Crede în tine!"</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Fericire</td>
+                                                    <td>vesel</td>
+                                                    <td>Zi de naștere</td>
+                                                    <td>"Sărbătorește orice clipă!"</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                         <p>Fie că este un gest simbolic sau un dar special ales, fiecare cadou poartă în el o parte din sufletul celui care îl oferă. La fel ca un 
                             <strong>kiseki</strong>, el vine neașteptat, dar rămâne pentru totdeauna în amintire.</p>
                         <p>Aici, la <strong> Kiseki</strong>, credem în puterea micilor miracole. 
                             Fiecare cadou pe care îl alegi poate deveni parte dintr-o poveste de neuitat. 
                             Alege să dăruiești un kiseki – pentru că cele mai frumoase surprize nu sunt întâmplătoare, ci pline de iubire. ✨</p>
                          </section>
+
+                         <div class="container-text-animat">
+                            <span class="text-animat"> Te asteapta muuuuulte surprize!!</span>
+                        </div>
+                        
                     </div>
                     
-
                     <div id="promotii">
                         <section id="sectiune-produse">
                             <h2> Produsele Noastre   <i class="fa-solid fa-ribbon" id="icon-static"></i> </h2>
@@ -57,8 +105,7 @@
                                     <li><span>✨</span> Și multe alte surprize!</li>
                                 </ul>
                             </div>
-                            <p><%= imaginiAnimata ? "Exista imaginiAnimata" : "Nu exista imaginiAnimata" %></p>
-
+                            
                             <% if (imaginiAnimata.length > 0) { %>
                                 <div class="galerie-animata">
                                   <% imaginiAnimata.forEach((imagine, idx) => { %>
@@ -68,15 +115,19 @@
                                   <% }) %>
                                 </div>
                               <% } %>
-                              
+
                             <h2>Grijă și pasiune în fiecare detaliu</h2>
+                            
+                            <div class="text-coloane">
                             <p>Fiecare produs pe care îl realizăm este mai mult decât un simplu obiect – 
                                 este o poveste, un sentiment, o amintire prețioasă care prinde viață. 
                                 Punem suflet în fiecare detaliu, pentru că știm că un cadou nu este doar un dar, ci o expresie a iubirii, a grijii și a momentelor de neuitat.</p>
-                            <p>Ne dedicăm fiecărei creații cu pasiune și atenție, alegând cu grijă materialele, lucrând cu precizie și adăugând acea notă specială care face diferența. 
+                            
+                            <p> Ne dedicăm fiecărei creații cu pasiune și atenție, alegând cu grijă materialele, lucrând cu precizie și adăugând acea notă specială care face diferența. 
                                 Fie că este vorba despre un mesaj gravat cu emoție, o culoare aleasă perfect sau un design personalizat, 
                                 totul este gândit pentru a aduce bucurie și pentru a transforma un gest simplu într-o emoție profundă.</p>
-                            <figure class="imagine-container">
+                            </div> 
+                                <figure class="imagine-container">
                                 <picture>
                                     <source srcset="/resurse/imagini/diverse/poza-mica4.jpg" media="(max-width:700px)" />
                                     <source srcset="/resurse/imagini/diverse/poza-mare16.jpg" media="(max-width:1200px)" />
@@ -84,17 +135,19 @@
                                 </picture>
                                 <figcaption>🌟 Amintiri ce durează o viață! 🌟</figcaption>
                             </figure>
+                            
                             <p>Credem că adevărata valoare a unui cadou stă în intenția din spatele lui. 
                                 De aceea, fiecare produs pe care îl oferim este făcut cu dragoste, 
                                 pentru ca tu să poți dărui nu doar un obiect, ci o parte din sufletul tău. 💖</p>
-                            <blockquote class="citat">„Un cadou personalizat este o amintire prețioasă.”</blockquote>
+                            
+                                <blockquote class="citat">„Un cadou personalizat este o amintire prețioasă.”</blockquote>
                             <div class="buton-container">
                                 <a href="#shop" class="buton-cumpara">🛒 Vezi Produsele</a>
                             </div>
                            
                             <div id="container-duotone">
                                 <div id="imagine-duotone"></div>
-                            </div>                            
+                            </div>   
 
                         </section>
                     </div>
@@ -173,6 +226,7 @@
                                 <td>-</td>
                             </tr>
                         </table>
+
                     </div>
                     <div id="calendar">
                         <h2>Martie 2025</h2>
@@ -386,10 +440,12 @@
         </div>   
              
              <div id="altele">
+                
                 <section id="sectiune-altele">
                 <h2> Pentru cei curioși: </h2>
                      <embed src="resurse/pdf1.pdf" type="application/pdf">
                 </section>
+
             </div>
 
             <div id="galerie_statica">
@@ -399,9 +455,9 @@
     </div>
 </main>
 
-<footer>
-    <%-include("../fragmente/footer.ejs")%>
-</footer>
+    <footer>
+        <%-include("../fragmente/footer.ejs")%>
+    </footer>
 
     </body>
 </html>

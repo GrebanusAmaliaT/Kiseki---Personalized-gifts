@@ -8,16 +8,18 @@
     position: relative;
     overflow: visible; /* asta ca steaua sa poata iesi in afara steaua*/
     z-index: 1;
+    color: black;
 }
 
 .linie-cu-steluta::after {
     content: "✻";
     position: absolute;
+
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(1.8);
     font-size: 20px;
-    color: grey;
+
     background-color: white;
     padding: 5px;
     z-index: 2; 
