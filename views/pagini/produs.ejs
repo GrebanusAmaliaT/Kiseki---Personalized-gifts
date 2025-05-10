@@ -1,39 +1,82 @@
 <!DOCTYPE html>
-<html  lang="ro">
-    <head>
-        <meta name="description" content="Cofetaria Dulcelind ofera prajituri, torturi, produse de patiserie cu optiunea de achizitie online si livrare prin curier.">
-        <meta name="keywords" content="cofetarie, Dulcelind, prajituri, torturi, dulce, pateuri, produse">
-        
-        <title>CofetÄƒria Dulcelind - home</title>
-        <%- include("../fragmente/head") %>     
-        <link href="/resurse/css/produs.css" type="text/css" rel="stylesheet" />
-    </head>
-    <body>
-        <header class="c1" id="titlu" >
-            <h1 style="color:red;">Cofetaria <span>Dulcelind</span></h1>
-            <%- include("../fragmente/nav") %>
-        </header>
-    <main>
-        <section>
-            <h2>PaginÄƒ produs</h2>
-                <article id="art-produs">
-                    <h3><span class="nume"><%- locals.prod.nume %></span></h3>
-                    <p>Pret: <span class="pret"><%- locals.prod.pret %> </span></p>
-                    <p>Descriere: <span class="descriere"><%- locals.prod.descriere %> </span></p>
-                    <p>Ingrediente: <span class="ingrediente"><%- locals.prod.ingrediente %> </span></p>
-                    <p>Calorii: <span class="calorii"><%- locals.prod.calorii %> </span></p>
-                    <p>Gramaj: <span class="gramaj"><%- locals.prod.gramaj %> </span></p>
-                    <p>Categorie: <span class="categorie"><%- locals.prod.categorie %> </span></p>
-                    <p>Pentru diabetici: <span class="pt_diabetici"><%- locals.prod.pt_diabetici %> </span></p>
-                    <p>Data adÄƒugare: <span class="categorie"><%- locals.prod.data_adaugare %> </span></p>
-                    <figure class="imag-produs">
-                        <img  src="/resurse/imagini/produse/<%- locals.prod.imagine %>" alt="[imagine <%- locals.prod.nume %>]" />
-                    </figure>    
-                </article>
-            
-        </section>
-    </main>
+<html lang="ro">
+  <head>
+    <title>KISEKI</title>
 
+    <meta charset="UTF-8" />
+    <meta name="keywords" content="cadouri, personalizate, surpriza, idei de cadouri, unice" />
+    <meta name="description" content="Descoperă cadouri personalizate perfecte pentru orice ocazie. Fă-ți cadoul special!" />
+    <meta name="author" content="Kiseki" />
+
+    <%- include("../fragmente/head.ejs") %>
+    <link href="/resurse/CSS/produs.css" type="text/css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <header>
+      <h1 style="color:brown">Kiseki - Cadouri Personalizate</h1>
+    </header>
+   
+
+    <main>
+      <section>
+        <h2 style="text-align: center;">Pagina produs - <%- prod.nume %></h2>
+      
+        <article id="elem_<%- prod.id %>" class="produs <%- prod.tip.replace(/\s+/g, '') %>">
+            
+            <div style="display: flex; align-items: flex-start;">
+              <table>
+                <tr>
+                  <td>Preț</td>
+                  <td><%- prod.pret %> lei</td>
+                </tr>
+                <tr>
+                  <td>Dimensiune</td>
+                  <td><%- prod.dimensiune_cm %> cm</td>
+                </tr>
+                <tr>
+                  <td>Culoare</td>
+                  <td><%- prod.culoare %></td>
+                </tr>
+                <tr>
+                  <td>Elemente personalizare</td>
+                  <td><%- prod.elemente_personalizare.join(", ") %></td>
+                </tr>
+                <tr>
+                  <td>Data adăugare</td>
+                  <td>
+                    <time datetime="<%- prod.data_adaugare.toISOString() %>">
+                      <%- prod.data_adaugare.toLocaleDateString("ro-RO", {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric',
+                        weekday: 'long'
+                      }) %>
+                    </time>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Include ambalaj standard?</td>
+                  <td><%= prod.include_ambalaj ? "Da" : "Nu" %></td>
+                </tr>
+              </table>
+              
+              <figure>
+                <a href="/produs/<%- prod.id %>">
+                    <img src="<%- prod.imagine %>" style="width:300px ;height:300px;" alt="[imagine <%- prod.nume %>]" />
+                </a>
+            </figure>
+
+            </div>
+            <p><%- prod.descriere %></p>
+            <p><strong>Categorie:</strong> <%- prod.tip %></p>
+          </article>
+          
+      </section>
+    </main>
+<footer> 
     <%- include("../fragmente/footer") %>
-    </body>
+</footer>
+
+  </body>
 </html>

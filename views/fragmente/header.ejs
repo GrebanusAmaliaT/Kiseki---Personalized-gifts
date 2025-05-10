@@ -34,10 +34,11 @@
         </li>
         <li> <div> Produse </div>
             <ul> 
-            <li> <a href="/produse"> Toate</a> </li>
-            <li> <a href="/produse?tip=tip1"> Tip1</a>  </li>
-            <li> <a href="/produse?tip=tip2"> Tip1</a>  </li>
-            <li> <a href="/produse?tip=tip3"> Tip1</a>  </li>
+                <li><a href="/produse">Toate</a></li>
+                <% for (let opt of optiuni) { %>
+                    <li><a href="/produse/<%- opt.unnest %>"><%- opt.unnest %></a></li>
+                <% } %>
+                
             </ul>
         </li>
         <li> <a href="/despre"> Despre noi </a> </li>

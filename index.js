@@ -8,7 +8,7 @@ const pg=require("pg");
 
 const Client=pg.Client;
 
-client=new Client({
+const client=new Client({
     database:"tehniciweb",
     user:"ami",
     password:"parola",
@@ -26,7 +26,7 @@ client.query("select * from unnest(enum_range(null::categ_prajitura))", function
     console.log(rezultat)
 })
 
-app= express();
+const app= express();
 
 v=[10,27,23,44,15]
 
@@ -197,6 +197,17 @@ function initImagini(){
 
 initImagini();
 
+app.use(async function(req, res, next){
+    try {
+        const rezultat = await client.query("SELECT unnest(enum_range(NULL::categ_produs))");
+        res.locals.optiuni = rezultat.rows; // disponibil în toate paginile
+    } catch (err) {
+        console.log("Eroare la query optiuni:", err);
+        res.locals.optiuni = [];
+    }
+    next();
+});
+
 app.use("/resurse", express.static(path.join(__dirname, 'resurse')))
 app.use("/node_modules", express.static(path.join(__dirname, 'node_modules')))
 
@@ -238,7 +249,7 @@ app.get("/cerere", function(req, res) {
 })
 
 app.get("/fisier", function(req, res) {
-    res.sendfile(path.join(__dirname,"package.json") )
+    res.sendFile(path.join(__dirname,"package.json") )
 })
 
 
@@ -257,14 +268,16 @@ app.get("/abc", function(req, res,next){
 app.get("/produse", function(req, res){
     console.log(req.query)
     var conditieQuery=""; // TO DO where din parametri
+    if(req.query.tip){
+        conditieQuery=`where tip_cadou='${req.query.tip}' `
+    }
 
-
-    queryOptiuni=" select * from unnest(enum_range(null::categ_prajitura)) "
+    queryOptiuni = "select * from unnest(enum_range(null::tip_cadou))"
     client.query(queryOptiuni, function(err, rezOptiuni){
         console.log(rezOptiuni)
 
 
-        queryProduse="select * from prajituri"
+        queryProduse="select * from cadouri" +conditieQuery
         client.query(queryProduse, function(err, rez){
             if (err){
                 console.log(err);
@@ -277,6 +290,50 @@ app.get("/produse", function(req, res){
     });
 })
 
+app.get("/produs/:id", function(req, res){
+    console.log(req.params)
+    client.query(`select * from cadouri where id=${req.params.id}`, function(err, rez){
+        if (err){
+            console.log(err);
+            afisareEroare(res, 2);
+        }
+        else{
+            if (rez.rowCount==0){
+                afisareEroare(res, 404);
+            }
+            else{
+                res.render("pagini/produs", {prod: rez.rows[0]})
+            }
+        }
+    })
+})
+
+app.get("/produse/:tip", function(req, res) {
+    const tipCerut = req.params.tip;
+
+   
+    client.query("SELECT * FROM unnest(enum_range(NULL::tip_cadou))", function(err, rezOptiuni) {
+        if (err) {
+            console.log(err);
+            afisareEroare(res, 2, "Eroare interogare tipuri.");
+            return;
+        }
+
+        client.query("SELECT * FROM cadouri WHERE tip = $1", [tipCerut], function(err2, rezProduse) {
+            if (err2) {
+                console.log(err2);
+                afisareEroare(res, 2, "Eroare interogare produse.");
+                return;
+            }
+
+            // Trimitem pagina cu produse filtrate + opțiunile
+            res.render("pagini/produse", {
+                produse: rezProduse.rows,
+                optiuni: rezOptiuni.rows
+            });
+        });
+    });
+});
 
 app.get(/^\/resurse\/[a-zA-Z0-9_\/]*$/, function(req,res,next){
     afisareEroare(res,403);

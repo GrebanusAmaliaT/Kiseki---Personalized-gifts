@@ -1,79 +1,146 @@
-main{
-    --padd-main:1rem;
-    padding-left:var(--padd-main);
-    padding-right:var(--padd-main);
+main {
+    --padd-main: var(--padding-standard);
+    padding-left: var(--padd-main);
+    padding-right: var(--padd-main);
 }
 
-.grid-produse{
-    display:grid;
+/* === GRILĂ PRODUSE === */
+.grid-produse {
+    display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap:1rem;
+    gap: 2rem;
+    margin-top: var(--spatiere-pagina-mici);
 }
-.grid-produse .produs{
-    border-radius: 2rem;
-    box-shadow: 0px 0px 0.8rem 0.3rem grey;
+
+.grid-produse .produs {
+    background-color: var(--culoare-fundal-element);
+    border-radius: var(--border-radius-standard);
+    box-shadow: var(--box-shadow-standard);
     overflow: hidden;
-}
-
-.grid-produse .produs h3{
-    background-color: var(--culoare-roz-inchis);
-    text-align: center;
-    margin-top: 0;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-}
-
-.grid-produse .produs h3 a{
-    color:black;
-}
-.grid-produse .produs h3 a:hover{
-    color:white;
-}
-.grid-produse .produs figure{
-    text-align: center;
-}
-.grid-produse .produs figure img{
-    border:1px solid grey
-}
-.grid-produse .produs .info-prod{
-    display:flex;
-    background-color: var(--cl-marcare);
-}
-.grid-produse .produs .info-prod p{
-    width:30%;
-    text-align:center;
-    font-weight:bold;
-}
-
-.grid-produse .produs p.categorie{
-
-    text-align:center;
-    font-weight:bold;
-}
-
-.info-produse{
-    background-color: var(--cl-marcare);
-    padding:0.2rem;
-    box-shadow: 0px 0px 0.5rem 0.15rem grey;
-}
-
-.produs{
+    padding-bottom: 1.5rem;
+    border: 1px solid var(--culoare-border);
     position: relative;
 }
-.selecteaza-cos{
-    display: inline-block;
-    background-color: var(--culoare-mov);
-    position:absolute;
-    bottom:0.5rem;
-    right:0.5rem;
-    border-radius: 0.5rem;
+
+.grid-produse .produs h3 {
+    background-color: var(--culoare-fundal-principal);
+    color: white;
     text-align: center;
-    padding:0.3rem;
-    border:1px solid transparent;
+    margin-top: 0;
+    padding: 0.5rem 0;
+    font-size: 30px;
 }
 
-.selecteaza-cos:hover{
-    background-color: var(--cl-marcare);
-    
-    border:1px solid  var(--culoare-mov);
+.grid-produse .produs h3 a {
+    color: var(--culoare-deschisa);
+    text-decoration: none;
+    font-size: 25px;
+}
+
+.grid-produse .produs h3 a:hover {
+    color: white;
+}
+
+.grid-produse .produs figure {
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.grid-produse .produs figure img {
+    width: 80%;
+    height: auto;
+}
+
+.grid-produse .produs .info-prod {
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--culoare-footer2);
+    padding: 0.5rem 0;
+}
+
+.grid-produse .produs .info-prod p {
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+    width: 33%;
+    font-size: 20px;
+}
+
+.grid-produse .produs p.categorie {
+    text-align: center;
+    font-weight: bold;
+    padding-top: 0.5rem;
+}
+
+/* === BUTON SELECTARE === */
+.selecteaza-cos {
+    position: absolute;
+    bottom: 0.75rem;
+    right: 0.75rem;
+    background-color: var(--culoare-deschisa);
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--border-mic);
+    font-weight: bold;
+    border: 1px solid transparent;
+}
+
+.selecteaza-cos:hover {
+    background-color: var(--culoare-footer2);
+    border: 2px solid var(--culoare-fundal-principal);
+}
+
+/* === INPUTURI & FILTRARE === */
+main input[type="text"],
+main input[type="range"],
+main select {
+    padding: 0.4rem;
+    border-radius: var(--border-mic);
+    border: 1px solid var(--culoare-border);
+    margin-top: 0.3rem;
+    font-size: 1rem;
+    width: 60%;
+}
+
+main input[type="radio"] {
+    margin-left: 0.5rem;
+    transform: scale(1.2);
+    accent-color: var(--culoare-fundal-principal);
+}
+
+main label,
+main div > p,
+main div > p label {
+    display: block;
+    font-size: 1.05rem;
+    font-family: "Trebuchet MS", sans-serif;
+    color: var(--culoare-fundal-principal);
+    margin-top: 0.6rem;
+}
+
+#infoRange {
+    font-weight: bold;
+    margin-left: 0.5rem;
+    color: var(--culoare-fundal-principal);
+    font-size: 1rem;
+}
+
+/* === BUTOANE === */
+main button {
+    background-color: var(--culoare-deschisa);
+    color: black;
+    padding: 0.4rem 1rem;
+    border-radius: var(--border-radius-standard);
+    border: 2px solid var(--culoare-fundal-principal);
+    font-weight: bold;
+    margin: 0.4rem 0.6rem 0.4rem 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3);
+    font-size: 1rem;
+}
+
+main button:hover {
+    background-color: var(--culoare-fundal-principal);
+    color: white;
+    border: 2px solid var(--culoare-deschisa);
 }
