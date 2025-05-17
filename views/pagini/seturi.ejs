@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <title>KISEKI</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="cadouri, personalizate, surpriza, idei de cadouri, unice">
+    <meta name="description" content="Descoperă cadouri personalizate perfecte pentru orice ocazie. Fă-ți cadoul special!">
+    <meta name="author" content="Nume">
+
+    <%- include("../fragmente/head.ejs") %>
+
+    <link rel="stylesheet" href="/resurse/CSS/seturi.css" type="text/css" />
+    <link rel="stylesheet" href="/resurse/CSS/dark_theme.css" type="text/css" />
+</head>
+
+<body>
+    <header class="c1" id="titlu">
+        <h1 style="color:brown;">Kiseki - Cadouri Personalizate</h1>
+    </header>
+
+    <%- include("../fragmente/header") %>
+
+    <main class="container">
+        <h1 style="text-align:center" class="titlu-pagina">Seturi de Produse</h1>
+         
+
+        <% if (seturi.length === 0) { %>
+            <p class="text-danger">Nu există seturi de produse.</p>
+        <% } %>
+
+        <% for (let set of seturi) { %>
+            <section class="card-set">
+                <hr class="linie-cu-steluta">
+                <h2 style="text-align:center; color:brown; " class="titlu-set"><%= set.nume_set %></h2>
+                <h3 style="text-align:center" class="descriere-set"><%= set.descriere_set %></h3>
+
+                <div class="container-produse">
+                    <% for (let produs of set.produse) { %>
+                        <div class="card-produs">
+                            <a href="/produs/<%= produs.id %>">
+                                <img src="<%= produs.imagine %>" alt="<%= produs.nume %>">
+                            </a>
+                            <div class="info-produs">
+                                <a href="/produs/<%= produs.id %>"><h5><%= produs.nume %></h5></a>
+                                <p><%= produs.pret %> lei</p>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+
+                <p style="text-align:center"  class="pret-final"><strong>Preț cu reducere:</strong> <%= set.pret_final.toFixed(2) %> lei</p>
+            </section>
+        <% } %>
+    </main>
+
+    <footer>
+        <%- include("../fragmente/footer") %>
+    </footer>
+</body>
+</html>

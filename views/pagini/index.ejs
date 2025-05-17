@@ -8,7 +8,7 @@
         <meta name="author" content="Nume">
         <%-include("../fragmente/head.ejs")%>
     </head>
-    <body>
+    <body class="dark">
         <header>
             <div id="container-reflexie"> 
             <h1 id="text" style="color:brown ">Kiseki -  Cadouri Personalizate</h1>
@@ -25,10 +25,10 @@
                         <section id="sectiune-acasa">
 
                         <div class="container-custom">
-                            <h1> Bine ai venit pe Kiseki! </h1>
-                            <button class="btn btn-custom"> Ne bucuram sa te avem alaturi! </button>
-                          </div>
-                          
+                            <h1>Bine ai venit pe Kiseki!</h1>
+                            <a href="/despre" class="btn-custom" target="_blank" rel="noopener">~Descopera istoria noastra~</a>
+                        </div>
+
                         <p style="text-align: center;">Descoperă cele mai frumoase <b>cadouri personalizate</b> pentru orice ocazie.</p>
                         
                         <p><b>Ip: </b><%- locals.ip %></p>
@@ -142,7 +142,8 @@
                             
                                 <blockquote class="citat">„Un cadou personalizat este o amintire prețioasă.”</blockquote>
                             <div class="buton-container">
-                                <a href="#shop" class="buton-cumpara">🛒 Vezi Produsele</a>
+                                <a href="/produse" class="buton-cumpara">🛒 Vezi Produsele</a>
+
                             </div>
                            
                             <div id="container-duotone">

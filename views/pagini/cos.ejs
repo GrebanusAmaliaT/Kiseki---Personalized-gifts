@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Coșul meu</title>
+    <%- include("../fragmente/head") %>
+    <link rel="stylesheet" href="/resurse/CSS/produse.css">
+</head>
+<body>
+
+    <header class="c1" id="titlu" >
+       <h1 style="color:brown ">Kiseki -  Cadouri Personalizate</h1> 
+    </header>
+
+    <%- include("../fragmente/header") %>
+
+    <main>
+        <h2>Produsele din coșul tău</h2>
+        <div class="grid-produse" id="cos-produse">
+            <% for (let prod of produse) { %>
+                <article class="produs" data-id="<%= prod.id %>">
+                    <h3 class="val-nume"><%= prod.nume %></h3>
+                    <p class="val-pret">Preț: <%= prod.pret %> lei</p>
+                    <img src="<%= prod.imagine %>" style="width:150px;">
+                    <button class="btn btn-danger btn-sm sterge-cos">Șterge din coș</button>
+                </article>
+            <% } %>
+        </div>
+
+        <p id="mesaj-gol" class="text-danger fs-5" style="display:none;">
+            Coșul este gol.
+        </p>
+    </main>
+
+    <%- include("../fragmente/footer") %>
+
+    <script>
+        window.addEventListener("DOMContentLoaded", function () {
+          let cos = JSON.parse(localStorage.getItem("cos") || "[]");
+          const produse = document.querySelectorAll(".produs");
+          let count = 0;
+      
+          produse.forEach(p => {
+            const id = p.dataset.id;
+            if (!cos.includes(id)) {
+              p.remove();
+            } else {
+              count++;
+            }
+          });
+      
+          if (count === 0) {
+            document.getElementById("mesaj-gol").style.display = "block";
+          }
+      
+          // Butoane de ștergere
+          document.querySelectorAll(".sterge-cos").forEach(btn => {
+            btn.addEventListener("click", function () {
+              const produs = this.closest(".produs");
+              const id = produs.dataset.id;
+      
+              // Eliminăm din localStorage
+              let cos = JSON.parse(localStorage.getItem("cos") || "[]");
+              cos = cos.filter(pid => pid !== id);
+              localStorage.setItem("cos", JSON.stringify(cos));
+      
+              // Eliminăm din pagină
+              produs.remove();
+      
+              // Verificăm dacă mai e ceva în coș
+              if (document.querySelectorAll(".produs").length === 0) {
+                document.getElementById("mesaj-gol").style.display = "block";
+              }
+            });
+          });
+        });
+      </script>
+      
+</body>
+</html>

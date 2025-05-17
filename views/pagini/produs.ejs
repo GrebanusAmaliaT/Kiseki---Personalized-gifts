@@ -1,27 +1,46 @@
 <!DOCTYPE html>
-<html lang="ro">
-  <head>
-    <title>KISEKI</title>
+<html  lang="ro">
+    <head>
+        <title>KISEKI</title>
+            <meta charset="UTF-8">
+            <meta name="keywords" content="cadouri, personalizate, surpriza, idei de cadouri, unice">
+            <meta name="description" content="Descoperă cadouri personalizate perfecte pentru orice ocazie. Fă-ți cadoul special!">
+            <meta name="author" content="Nume">
 
-    <meta charset="UTF-8" />
-    <meta name="keywords" content="cadouri, personalizate, surpriza, idei de cadouri, unice" />
-    <meta name="description" content="Descoperă cadouri personalizate perfecte pentru orice ocazie. Fă-ți cadoul special!" />
-    <meta name="author" content="Kiseki" />
+            <%-include("../fragmente/head.ejs")%>
+           
+            <link rel="stylesheet" href="/resurse/CSS/produse.css" type="text/css" />
+            <link rel="stylesheet" href="/resurse/CSS/produs.css" type="text/css" />
+            
+            <link rel="stylesheet" href="/resurse/CSS/seturi.css" type="text/css" />
+            <link rel="stylesheet" href="/resurse/CSS/dark_theme.css" type="text/css" />
+            <script src="/resurse/js/produse.js"></script>
+          
+          
+    </head>
+    
+    <body>
 
-    <%- include("../fragmente/head.ejs") %>
-    <link href="/resurse/CSS/produs.css" type="text/css" rel="stylesheet" />
-  </head>
+      <header class="c1" id="titl
+      \u" >
+        <h1 style="color:brown ">Kiseki -  Cadouri Personalizate</h1> 
+     </header>
 
-  <body>
-    <header>
-      <h1 style="color:brown">Kiseki - Cadouri Personalizate</h1>
-    </header>
-   
+    
+     <div id="container-comparare" class="d-none" style="position:fixed; bottom:1rem; right:1rem; background:white; padding:1rem; border:2px solid black; z-index:9999;">
+      <h5>Produse de comparat:</h5>
+      <ul id="lista-comparare" style="list-style:none; padding:0;"></ul>
+      <button id="btn-afisare-comparare" class="btn btn-success d-none">afișează</button>
+    </div>
+    
 
     <main>
       <section>
-        <h2 style="text-align: center;">Pagina produs - <%- prod.nume %></h2>
-      
+        <h1 style="text-align: center; ">Pagina produs - <%- prod.nume %></h1>
+        
+        <button class="btn-compare" data-id="<%= prod.id %>" data-nume="<%= prod.nume %>">compară</button>
+
+                           
         <article id="elem_<%- prod.id %>" class="produs <%- prod.tip.replace(/\s+/g, '') %>">
             
             <div style="display: flex; align-items: flex-start;">
@@ -70,9 +89,74 @@
             </div>
             <p><%- prod.descriere %></p>
             <p><strong>Categorie:</strong> <%- prod.tip %></p>
+          
           </article>
           
       </section>
+      
+      
+      <% if (similare && similare.length > 0) { %>
+        <section>
+          <hr class="linie-cu-steluta">
+          <h2 style="text-align: center; ">Produse similare</h2>
+          <hr class="linie-cu-steluta">
+          <div class="grid-produse">
+            <% for (let s of similare) { %>
+              <article class="produs">
+                <a href="/produs/<%= s.id %>">
+                  <img src="<%= s.imagine %>" alt="<%= s.nume %>" style=" text-align:center; width: 150px;">
+                </a>
+                <h4>
+                  <a href="/produs/<%= s.id %>"><%= s.nume %></a>
+                </h4>
+                <p>Preț: <%= s.pret %> lei</p>
+              </article>
+            <% } %>
+          </div>
+        </section>
+        <% } %>
+
+        <% if (seturi && seturi.length > 0) { %>
+          <section class="set-container">
+            <hr class="linie-cu-steluta">
+            <h2 style="text-align:center">Seturi din care face parte acest produs:</h2>
+            <hr class="linie-cu-steluta">
+        
+            <% for (let set of seturi) { %>
+              <div class="set">
+                <h3 style="text-align:center"><%= set.nume_set %></h3>
+                <p style="text-align:center"><%= set.descriere_set %></p>
+        
+                <div class="container-produse">
+                  <% for (let i = 0; i < set.produse_ids.length; i++) { %>
+                    <div class="card-produs">
+                      <a href="/produs/<%= set.produse_ids[i] %>">
+                        <img src="<%= set.produse_imagini[i] %>" alt="Imagine produs">
+                      </a>
+                      <div class="info-produs">
+                        <h5>
+                          <a href="/produs/<%= set.produse_ids[i] %>" style="text-decoration: none; color: inherit;">
+                            <%= set.produse_nume[i] %>
+                          </a>
+                        </h5>
+                        <p><%= set.produse_preturi[i] %> lei</p>
+                      </div>
+                    </div>
+                  <% } %>
+                </div>
+        <br> <br> <br>
+                <p style="text-align:center"><strong>Preț total set:</strong>
+                  <%= (
+                    set.produse_preturi.reduce((acc, val) => acc + parseFloat(val), 0) 
+                    * (1 - Math.min(5, set.produse_preturi.length) * 0.05)
+                  ).toFixed(2) %> lei
+                </p>
+              </div>
+            <% } %>
+          </section>
+        <% } %>
+        
+          
     </main>
 <footer> 
     <%- include("../fragmente/footer") %>

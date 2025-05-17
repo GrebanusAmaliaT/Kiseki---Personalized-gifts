@@ -12,26 +12,39 @@
             <script type="text/javascript" src=/resurse/js/produse-cos.js></script>
 
             <!-- Bootstrap personalizat -->
-            <link rel="stylesheet" href="/resurse/CSS/custom_produse.css" type="text/css" />
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
             <link rel="stylesheet" href="/resurse/CSS/produse.css" type="text/css" />
+            <link rel="stylesheet" href="/resurse/CSS/dark_theme.css" type="text/css" />
+          
           
     </head>
     
     <body>
+
 
     <header class="c1" id="titlu" >
        <h1 style="color:brown ">Kiseki -  Cadouri Personalizate</h1> 
     </header>
         <%- include("../fragmente/header") %>
 
-    <main class="container-fluid px-5">
+    <main > 
+        <hr class="linie-cu-steluta">
+        <h1 style="text-align:center; color:brown;">Alegeți-vă produsele după bunul plac!</h1>
+        <hr class="linie-cu-steluta">
         <div class="row mb-3">
             <div class="col-md-6">
                 <label for="inp-nume" class="form-label">Numele produsului:</label>
-                <input type="text" id="inp-nume" class="form-control">
+                    <input type="text" id="inp-nume" class="form-control" placeholder="ex: <%=exempluNume %>">
+                    <datalist id="nume-produse">
+                        <% for (let nume of datalistProduse) { %>
+                          <option value="<%- nume %>">
+                        <% } %>
+                      </datalist>
             </div>
-
+            
+            <!-- RADIO input: dimensiune -->
             <div class="col-md-6">
                 <label class="form-label">Dimensiunea:</label>
                 <div class="btn-group" role="group" aria-label="Dimensiune">
@@ -50,15 +63,17 @@
             </div>
         </div>
 
+        <!-- RANGE input: pret minim -->
         <div class="row mb-3">
             <div class="col-md-6">
                 <label for="inp-pret" class="form-label">Preț minim:</label>
-                <input type="range" class="form-range" id="inp-pret" min="0" max="500" value="0">
-                <span id="infoRange" class="fw-bold">(0)</span>
+                <input type="range" class="form-range" id="inp-pret" min="<%= minPret %>" max="<%= maxPret %>" value="<%= minPret %>">
+                <span id="infoRange">(<%= minPret %>)</span>
             </div>
-
+        
+            <!-- SELECT: simplu (categorie) -->
             <div class="col-md-6">
-                <label for="inp-categorie" class="form-label">Select simplu:</label>
+                <label for="inp-categorie" class="form-label">Select simplu  (categorie): </label>
                 <select id="inp-categorie" class="form-select">
                     <option id="sel-toate" selected value="toate">toate</option>
                     <% for (let opt of locals.optiuni) { %>
@@ -67,7 +82,42 @@
                 </select>
             </div>
         </div>
-
+        
+        <div class="row mb-3">
+            <!-- TEXTAREA: descriere produs -->
+            <div class="col-md-6">
+              <div class="form-floating">
+                <textarea class="form-control" placeholder="Scrie o descriere..." id="inp-descriere" style="height: 100px"></textarea>
+                <label for="inp-descriere">Descriere produs</label>
+              </div>
+            </div>
+            <!-- DATE: data adaugare -->
+            <div class="col-md-6">
+                <label for="inp-data" class="form-label">Data adăugare:</label>
+                <input type="date" id="inp-data" class="form-control" min="<%= minData %>" max="<%= maxData %>">
+              </div>
+          </div>
+          
+            <!-- SELECT MULTIPLU: elemente personalizare -->
+            <div class="col-md-6">
+                <label for="inp-elemente" class="form-label">Avem o gamă largă de servicii de personalizare:</label>
+                <select id="inp-elemente" multiple class="form-select">
+                  <% for (let el of elemente) { %>
+                    <option value="<%- el %>"><%- el %></option>
+                  <% } %>
+                </select>
+        </div>
+      
+          <div class="row mb-3">
+            <!-- CHECKBOX: ambalaj -->
+            <div class="col-md-6">
+              <div class="form-check form-switch">
+                <input class="btn-check" type="checkbox" id="inp-ambalaj">
+                <label class="btn btn-outline-success" for="inp-ambalaj">Include ambalaj</label>
+              </div>
+            </div>
+    
+       
         <div class="row mb-4">
             <div class="col-auto">
                 <button id="filtrare" class="btn btn-primary">
@@ -79,6 +129,8 @@
                     <i class="bi bi-arrow-counterclockwise"></i> <span class="d-none d-sm-inline">Reseteaza</span>
                 </button>
             </div>
+
+
             <div class="col-auto">
                 <button id="sortCrescNume" class="btn btn-primary">
                     <i class="bi bi-sort-alpha-down"></i> <span class="d-none d-sm-inline">Sortare crescătoare dupa pret si denumire</span>
@@ -93,29 +145,62 @@
 
         <p id="p-suma">Apasati Alt+"c" pentru suma preturilor produselor afisate.</p>
 
-        <section id="produse">
-            <h2>Produse</h2>
+        
+        <div id="container-comparare" class="position-fixed bottom-0 end-0 p-3 bg-light border border-dark d-none" style="z-index: 1000; max-width: 300px;">
+            <h5>Produse de comparat:</h5>
+            <ul id="lista-comparare" class="list-unstyled mb-2"></ul>
+            <button id="btn-afisare-comparare" class="btn btn-success btn-sm d-none">Afișează</button>
+        </div>
+
+        
+        <section id="s.produse">
+            <hr class="linie-cu-steluta">
+            <h1 style="text-align:center; color:brown;">~Gama noastra de produse~</h1>
+            <hr class="linie-cu-steluta">
             <div class="grid-produse">
-                <% for( let prod of locals.produse) { %>
-                    <article class="produs">
-                        <h3 class="nume">Numele produsului: <a href="/produs/<%-prod.id %>"><span class="val-nume"><%- prod.nume%></span></a></h3>
-                        <div class="info-prod">
-                            <p class="pret">Pret(lei): <span class="val-pret"><%- prod.pret%></span></p>
-                            <p class="dimensiune">Dimensiune(cm): <span class="val-gramaj"><%- prod.dimensiune_cm%></span></p>
-                        </div>
-                        <p class="categorie">Categorie:<span class="val-categorie"><%- prod.subcategorie%></span></p>
-                        <figure>
-                            <a href="/produs/<%- prod.id %>">
-                                <img src="<%- prod.imagine %>" style="width:50%;height:auto;" alt="[imagine <%- prod.nume %>]" />
-                            </a>
-                        </figure>
-                        <label class="selecteaza-cos">
-                            Selecteaza:<br/>
-                            <input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">
-                        </label>
-                    </article>
-                <% } %>
+                    <% for (let prod of produse) { %>
+                        <article class="produs">
+                            <button class="btn-compare" data-id="<%= prod.id %>" data-nume="<%= prod.nume %>">compară</button>
+
+                            <h3 class="nume">Numele produsului: <a href="/produs/<%- prod.id %>"><span class="val-nume"><%- prod.nume %></span></a></h3>
+                            
+                            <% if (produseIeftine.includes(prod.id)) { %>
+                                <p style=" text-align:center; font-size: 15px;" class="badge bg-success text-white">Cel mai ieftin din categorie!</p>
+                              <% } %>
+
+                            <div class="info-prod">
+                                <p class="pret">Preț: <span class="val-pret"><%- prod.pret %>ron</span></p>
+                                <p class="dimensiune">Dimensiune: <span class="val-dimensiune"><%- prod.dimensiune_cm %> cm</span></p>
+                                <p class="subcategorie">Subcategorie: <span class="val-subcategorie"><%- prod.subcategorie %></span></p>
+                            </div>
+
+                            <p class="descriere">Descriere: <span class="val-descriere"><%- prod.descriere %></span></p>
+                            <p class="elemente">Elemente: <span class="val-elemente"><%- prod.elemente_personalizare.join(", ") %></span></p>
+
+                            <p class="ambalaj">Include si un ambalaj basic? <span class="val-ambalaj"><%- prod.include_ambalaj %></span></p>
+                            
+                            <p class="data">
+                                <i class="bi bi-calendar-event me-1"></i>
+                                Adăugat la: 
+                                <span class="val-data" data-date="<%= new Date(prod.data_adaugare).toLocaleDateString('sv-SE') %>">
+                                    <%= new Date(prod.data_adaugare).toLocaleDateString("ro-RO", { year: 'numeric', month: 'long', day: 'numeric' }) %>
+                                </span>                                
+                            </p>
+
+                            <p class="categorie">Categorie:<span class="val-categorie"><%- prod.tip %></span></p>
+                            <figure>
+                                <a href="/produs/<%- prod.id %>">
+                                    <img src="<%- prod.imagine %>" style="width:50%;height:auto;" alt="[imagine <%- prod.nume %>]" />
+                                </a>
+                            </figure>
+                            <label class="selecteaza-cos">
+                                Selectează:<br/>
+                                <input type="checkbox" class="select-cos" value="<%- prod.id %>" autocomplete="off">
+                            </label>
+                        </article>
+                    <% } %>
             </div>
+            
         </section>
     </main>
 <footer> 

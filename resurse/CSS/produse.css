@@ -3,6 +3,44 @@ main {
     padding-left: var(--padd-main);
     padding-right: var(--padd-main);
 }
+body{
+    background-color: rgb(58, 6, 6);
+}
+.btn-compare {
+    padding: 0.5rem 1rem;
+    border: 2px solid #1d3557;
+    background-color: transparent;
+    color: #1d3557;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 0.5rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-compare:hover:not(:disabled) {
+    background-color: #1d3557;
+    color: white;
+}
+
+.btn-compare:disabled {
+    cursor: not-allowed;
+    position: relative;
+    color: #1d3557;
+    background-color: transparent;
+    
+}
+
+.btn-compare[data-tooltip]:hover:after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: 1.8em;
+    left: 200%;
+    transform: translateX(-50%);
+    border-radius: 4px;
+    white-space: nowrap;
+    font-size: 0.85em;
+}
 
 /* === GRILĂ PRODUSE === */
 .grid-produse {
@@ -15,7 +53,7 @@ main {
 .grid-produse .produs {
     background-color: var(--culoare-fundal-element);
     border-radius: var(--border-radius-standard);
-    box-shadow: var(--box-shadow-standard);
+    box-shadow:0.05rem 0.05rem 0.5rem 0.5rem rgba(0, 0, 0, 0.8); 
     overflow: hidden;
     padding-bottom: 1.5rem;
     border: 1px solid var(--culoare-border);
@@ -88,7 +126,12 @@ main {
     background-color: var(--culoare-footer2);
     border: 2px solid var(--culoare-fundal-principal);
 }
-
+  
+#sortCrescNume, #sortDescrescNume, #filtrare,#resetare{
+    background-color: var(--culoare-footer2);
+    border: 3px solid var(--culoare-fundal-principal);
+    color:black;
+}
 /* === INPUTURI & FILTRARE === */
 main input[type="text"],
 main input[type="range"],
@@ -144,3 +187,5 @@ main button:hover {
     color: white;
     border: 2px solid var(--culoare-deschisa);
 }
+
+  

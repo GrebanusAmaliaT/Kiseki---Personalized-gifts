@@ -5,6 +5,12 @@ const sharp=require("sharp");
 const sass=require("sass");
 const pg=require("pg");
 
+const AccesBD=require("./module_proprii/accesbd.js");
+AccesBD.getInstanta().select({tabel:"cadouri", campuri:["*"]}, function(err,rez) {
+    console.log("---------------Acces BD----------------")
+    console.log(err);
+    console.log(rez)
+});
 
 const Client=pg.Client;
 
@@ -17,15 +23,6 @@ const client=new Client({
 })
 
 client.connect()
-client.query("select * from prajituri", function(err, rezultat ){
-    console.log(err)    
-    console.log(rezultat)
-})
-client.query("select * from unnest(enum_range(null::categ_prajitura))", function(err, rezultat ){
-    console.log(err)    
-    console.log(rezultat)
-})
-
 const app= express();
 
 v=[10,27,23,44,15]
@@ -44,8 +41,17 @@ obGlobal={
     obImagini:null,
     folderScss:path.join(__dirname, "resurse/SCSS"),
     folderCss:path.join(__dirname, "resurse/CSS"),
-    folderBackup:path.join(__dirname,"backup")
+    folderBackup:path.join(__dirname,"backup"),
+    optiuniMeniu:null
 }
+
+client.query("select * from unnest(enum_range(null::tip_cadou))", function(err,rezultat) {
+    console.log(err);
+    console.log(rezultat);
+    obGlobal.optiuniMeniu=rezultat.rows
+
+});
+
 
 let vect_foldere=["temp", "backup", "temp1"]
 for(let folder of vect_foldere){
@@ -76,6 +82,7 @@ function compileazaScss(caleScss, caleCss){
     if (!path.isAbsolute(caleScss))
         caleScss=path.join(obGlobal.folderScss,caleScss )
     if (!path.isAbsolute(caleCss))
+        
         caleCss=path.join(obGlobal.folderCss,caleCss )
     
 
@@ -197,16 +204,27 @@ function initImagini(){
 
 initImagini();
 
-app.use(async function(req, res, next){
-    try {
-        const rezultat = await client.query("SELECT unnest(enum_range(NULL::categ_produs))");
-        res.locals.optiuni = rezultat.rows; // disponibil în toate paginile
+// app.use(async function(req, res, next){
+//     try {
+//         const rezultat = await client.query("SELECT unnest(enum_range(NULL::tip_cadou))");
+//         res.locals.optiuni = rezultat.rows; // disponibil în toate paginile
+//     } catch (err) {
+//         console.log("Eroare la query optiuni:", err);
+//         res.locals.optiuni = [];
+//     }
+//     next();
+// });
+
+app.use("/*", function(req,res,next) {
+    try{
+    res.locals.optiuniMeniu=obGlobal.optiuniMeniu
     } catch (err) {
-        console.log("Eroare la query optiuni:", err);
-        res.locals.optiuni = [];
-    }
+            console.log("Eroare la query optiuni:", err);
+            res.locals.optiuniMeniu = [];
+        }
+
     next();
-});
+})
 
 app.use("/resurse", express.static(path.join(__dirname, 'resurse')))
 app.use("/node_modules", express.static(path.join(__dirname, 'node_modules')))
@@ -265,53 +283,207 @@ app.get("/abc", function(req, res,next){
     next();
 })
 
+app.get("/produse/seturi", async function (req, res) {
+    try {
+        const seturiQuery = `
+            SELECT s.id, s.nume_set, s.descriere_set
+            FROM seturi s
+            JOIN asociere_set a ON s.id = a.id_set
+            JOIN cadouri p ON a.id_produs = p.id
+            GROUP BY s.id, s.nume_set, s.descriere_set
+        `;
+
+        const produseQuery = `
+            SELECT s.id AS id_set, p.id, p.nume, p.pret, p.imagine
+            FROM seturi s
+            JOIN asociere_set a ON s.id = a.id_set
+            JOIN cadouri p ON a.id_produs = p.id
+        `;
+
+        const [seturiResult, produseResult] = await Promise.all([
+            client.query(seturiQuery),
+            client.query(produseQuery)
+        ]);
+
+        const seturi = seturiResult.rows.map(set => {
+            set.produse = produseResult.rows.filter(p => p.id_set === set.id);
+           
+            set.pret_final = set.produse.reduce((acc, p) => acc + (Number(p.pret) || 0), 0) * 0.9;
+
+            return set;
+        });
+        
+        res.render("pagini/seturi", { seturi });
+
+    } catch (err) {
+        console.error("Eroare interogare seturi:", err);
+        afisareEroare(res, 2, "Eroare interogare seturi.");
+    }
+});
+
+
 app.get("/produse", function(req, res){
-    console.log(req.query)
-    var conditieQuery=""; // TO DO where din parametri
-    if(req.query.tip){
-        conditieQuery=`where tip_cadou='${req.query.tip}' `
+    console.log(req.query);
+    
+    let conditieQuery = "";
+    if (req.query.tip) {
+        conditieQuery = `WHERE tip='${req.query.tip}'`;
     }
 
-    queryOptiuni = "select * from unnest(enum_range(null::tip_cadou))"
-    client.query(queryOptiuni, function(err, rezOptiuni){
-        console.log(rezOptiuni)
+    const queryIeptine = `
+    SELECT DISTINCT ON (subcategorie) id
+    FROM cadouri
+    ORDER BY subcategorie, pret ASC
+    `;
 
+    const queryProduse = `SELECT * FROM cadouri ${conditieQuery}`;
+    const queryOptiuni = `SELECT * FROM unnest(enum_range(null::tip_cadou))`;
+    const queryMinMax = `SELECT MIN(pret) AS min, MAX(pret) AS max FROM cadouri`;
+    const queryDateBounds = `SELECT 
+    to_char(MIN(data_adaugare), 'YYYY-MM-DD') AS min, 
+    to_char(MAX(data_adaugare), 'YYYY-MM-DD') AS max 
+    FROM cadouri`;
+    const queryExemplu = `SELECT nume FROM cadouri ORDER BY RANDOM() LIMIT 1`;
+    const queryElemPers = `SELECT DISTINCT UNNEST(elemente_personalizare) AS elem FROM cadouri`;
+    const queryDatalist = `SELECT DISTINCT nume FROM cadouri`;
 
-        queryProduse="select * from cadouri" +conditieQuery
-        client.query(queryProduse, function(err, rez){
-            if (err){
-                console.log(err);
-                afisareEroare(res, 2);
-            }
-            else{
-                res.render("pagini/produse", {produse: rez.rows, optiuni:rezOptiuni.rows})
-            }
-        })
-    });
-})
-
-app.get("/produs/:id", function(req, res){
-    console.log(req.params)
-    client.query(`select * from cadouri where id=${req.params.id}`, function(err, rez){
-        if (err){
+    client.query(queryProduse, function(err, rezProduse){
+        if (err) {
             console.log(err);
             afisareEroare(res, 2);
+            return;
         }
-        else{
-            if (rez.rowCount==0){
-                afisareEroare(res, 404);
+
+        client.query(queryOptiuni, function(err, rezOptiuni){
+            if (err) {
+                console.log(err);
+                afisareEroare(res, 2);
+                return;
             }
-            else{
-                res.render("pagini/produs", {prod: rez.rows[0]})
-            }
-        }
-    })
-})
+
+            client.query(queryMinMax, function(err, rezMinMax){
+                if (err) {
+                    console.log(err);
+                    afisareEroare(res, 2);
+                    return;
+                }
+                client.query(queryDateBounds, function(err, rezDate){
+                    if (err) {
+                        console.log(err);
+                        afisareEroare(res, 2);
+                        return;
+                    }
+                client.query(queryExemplu, function(err, rezEx){
+                    if (err) {
+                        console.log(err);
+                        afisareEroare(res, 2);
+                        return;
+                    }
+
+                    client.query(queryElemPers, function(err, rezElem){
+                        if (err) {
+                            console.log(err);
+                            afisareEroare(res, 2);
+                            return;
+                        }
+
+                        client.query(queryDatalist, function(err, rezDatalist){
+                            if (err) {
+                                console.log(err);
+                                afisareEroare(res, 2);
+                                return;
+                            }
+
+                            client.query(queryIeptine, function(err, rezIeftine) {
+                                if (err) {
+                                    console.log(err);
+                                    afisareEroare(res, 2);
+                                    return;
+                                }
+                                const idIeptine = rezIeftine.rows.map(r => r.id);
+                                
+                                res.render("pagini/produse", {
+                                    produse: rezProduse.rows,
+                                    optiuni: rezOptiuni.rows,
+                                    minPret: rezMinMax.rows[0].min,
+                                    maxPret: rezMinMax.rows[0].max,
+                                    minData: rezDate.rows[0].min,
+                                    maxData: rezDate.rows[0].max,
+                                    exempluNume: rezEx.rows[0].nume,
+                                    elemente: rezElem.rows.map(r => r.elem),
+                                    datalistProduse: rezDatalist.rows.map(r => r.nume),
+                                    produseIeftine: idIeptine
+                                });
+                            });
+                        });
+                     });
+                    });
+                });
+            });
+        });
+    });
+});
+
+app.get("/produs/:id", async (req, res) => {
+    try {
+        const resultProd = await client.query("SELECT * FROM cadouri WHERE id=$1", [req.params.id]);
+        if (resultProd.rows.length === 0) return afisareEroare(res, 404);
+
+        const produs = resultProd.rows[0];
+
+        const resultSimilare = await client.query(
+            "SELECT * FROM cadouri WHERE tip=$1 AND id != $2 LIMIT 4",
+            [produs.tip, req.params.id]
+        );
+
+
+        const resultSeturi = await client.query(`
+            SELECT s.id, s.nume_set, s.descriere_set,
+                   ARRAY_AGG(p.id) AS produse_ids,
+                   ARRAY_AGG(p.nume) AS produse_nume,
+                   ARRAY_AGG(p.imagine) AS produse_imagini,
+                   ARRAY_AGG(p.pret) AS produse_preturi
+            FROM seturi s
+            JOIN asociere_set a ON s.id = a.id_set
+            JOIN cadouri p ON a.id_produs = p.id
+            WHERE s.id IN (
+                SELECT id_set FROM asociere_set WHERE id_produs=$1
+            )
+            GROUP BY s.id
+        `, [req.params.id]);
+
+        res.render("pagini/produs", { 
+            prod: produs, 
+            seturi: resultSeturi.rows,
+            similare: resultSimilare.rows });
+    } catch (e) {
+        console.error(e);
+        afisareEroare(res, 2);
+    }
+});
+
 
 app.get("/produse/:tip", function(req, res) {
     const tipCerut = req.params.tip;
 
-   
+    console.log(req.query);
+    
+    let conditieQuery = "";
+    if (req.query.tip) {
+        conditieQuery = `WHERE tip='${req.query.tip}'`;
+    }
+
+    const queryProduse = `SELECT * FROM cadouri ${conditieQuery}`;
+    const queryOptiuni = `SELECT * FROM unnest(enum_range(null::tip_cadou))`;
+    const queryMinMax = `SELECT MIN(pret) AS min, MAX(pret) AS max FROM cadouri`;
+    const queryDateBounds = `SELECT 
+    to_char(MIN(data_adaugare), 'YYYY-MM-DD') AS min, 
+    to_char(MAX(data_adaugare), 'YYYY-MM-DD') AS max 
+    FROM cadouri`;
+    const queryExemplu = `SELECT nume FROM cadouri ORDER BY RANDOM() LIMIT 1`;
+    const queryElemPers = `SELECT DISTINCT UNNEST(elemente_personalizare) AS elem FROM cadouri`;
+    const queryDatalist = `SELECT DISTINCT nume FROM cadouri`;
+
     client.query("SELECT * FROM unnest(enum_range(NULL::tip_cadou))", function(err, rezOptiuni) {
         if (err) {
             console.log(err);
@@ -325,13 +497,73 @@ app.get("/produse/:tip", function(req, res) {
                 afisareEroare(res, 2, "Eroare interogare produse.");
                 return;
             }
+                client.query(queryMinMax, function(err, rezMinMax){
+                                if (err) {
+                                    console.log(err);
+                                    afisareEroare(res, 2);
+                                    return;
+                                }
+                                client.query(queryDateBounds, function(err, rezDate){
+                                    if (err) {
+                                        console.log(err);
+                                        afisareEroare(res, 2);
+                                        return;
+                                    }
+                                client.query(queryExemplu, function(err, rezEx){
+                                    if (err) {
+                                        console.log(err);
+                                        afisareEroare(res, 2);
+                                        return;
+                                    }
 
-            // Trimitem pagina cu produse filtrate + opțiunile
-            res.render("pagini/produse", {
-                produse: rezProduse.rows,
-                optiuni: rezOptiuni.rows
-            });
-        });
+                                    client.query(queryElemPers, function(err, rezElem){
+                                        if (err) {
+                                            console.log(err);
+                                            afisareEroare(res, 2);
+                                            return;
+                                        }
+
+                                        client.query(queryDatalist, function(err, rezDatalist){
+                                            if (err) {
+                                                console.log(err);
+                                                afisareEroare(res, 2);
+                                                return;
+                                            }
+
+                                            res.render("pagini/produse", {
+                                                produse: rezProduse.rows,
+                                                optiuni: rezOptiuni.rows,
+                                                minPret: rezMinMax.rows[0].min,
+                                                maxPret: rezMinMax.rows[0].max,
+                                                minData: rezDate.rows[0].min,
+                                                maxData: rezDate.rows[0].max,
+                                                exempluNume: rezEx.rows[0].nume,
+                                                elemente: rezElem.rows.map(r => r.elem),
+                                                datalistProduse: rezDatalist.rows.map(r => r.nume)
+                                            });
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    });
+                });
+});
+
+app.get("/comparare", function(req, res){
+    let ids = req.query.ids?.split(",").map(x => parseInt(x)).filter(x => !isNaN(x));
+    if (!ids || ids.length !== 2) {
+        return res.send("Trebuie să compari exact două produse.");
+    }
+    client.query("SELECT * FROM cadouri WHERE id = ANY($1::int[])", [ids], function(err, result){
+        if (err) {
+            console.error(err);
+            return res.send("Eroare la comparare.");
+        }
+        if (result.rows.length !== 2) {
+            return res.send("Nu s-au găsit ambele produse.");
+        }
+        res.render("pagini/comparare", { p1: result.rows[0], p2: result.rows[1] });
     });
 });
 
@@ -347,6 +579,28 @@ app.get('/galerie', async (req, res) => {
     res.render('pagini/galerie', { imagini: imaginiAfisate });
 });
 
+app.get("/cos", (req, res) => {
+    client.query("SELECT * FROM cadouri")
+        .then(result => {
+            const produse = result.rows;
+            res.render("pagini/cos", { produse });
+        })
+        .catch(err => {
+            console.error("Eroare interogare cadouri:", err);
+            res.status(500).send("Eroare la interogarea bazei de date.");
+        });
+});
+
+
+app.get("/despre", function(req, res){
+    let nrRandom = Math.floor(Math.random() * (17 - 2)) + 2; // de la 2 la 16
+    let nrPutere2 = 1;
+    while (nrPutere2 * 2 <= nrRandom) {
+        nrPutere2 *= 2;
+    }
+    res.render("pagini/despre", { ip: req.ip, imagini: obGlobal.obImagini.imagini,nrImagini: nrPutere2 });
+    
+})
 
 app.get("/*.ejs", function(req, res, next){
     afisareEroare(res,400);
@@ -421,4 +675,3 @@ function selectRandomImages(imaginiValide) {
 
 app.listen(8080);
 console.log("Serverul a pornit")
-

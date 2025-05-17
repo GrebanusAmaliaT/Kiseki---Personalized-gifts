@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html  lang="ro">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="keywords" content="cadouri, personalizate, surpriza, idei de cadouri, unice">
+      <meta name="description" content="Descoperă cadouri personalizate perfecte pentru orice ocazie. Fă-ți cadoul special!">
+      <meta name="author" content="Nume">
+     
+      <title>Despre Kiseki</title>
+        
+        <%- include("../fragmente/head.ejs") %>
+
+    </head>
+    <body>
+    
+        <header>
+    <h1 style="color:brown ">Kiseki -  Cadouri Personalizate</h1>
+  
+        </header>
+        <%- include("../fragmente/header.ejs") %>
+
+        <style>
+            th,td{
+                text-align:center;
+            }
+        </style>
+  
+    <main>
+        <h2 style="text-align: center">Comparație produse</h2>
+    <table class="table table-bordered">
+    <thead>
+        <tr>
+        <th>Caracteristică</th>
+        <th><%= p1.nume %></th>
+        <th><%= p2.nume %></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <td>Preț</td>
+        <td><%= p1.pret %> lei</td>
+        <td><%= p2.pret %> lei</td>
+        </tr>
+        <tr>
+        <td>Dimensiune</td>
+        <td><%= p1.dimensiune_cm %> cm</td>
+        <td><%= p2.dimensiune_cm %> cm</td>
+        </tr>
+        <tr>
+        <td>Include ambalaj</td>
+        <td><%= p1.include_ambalaj ? "Da" : "Nu" %></td>
+        <td><%= p2.include_ambalaj ? "Da" : "Nu" %></td>
+        </tr>
+        <tr>
+        <td>Tip</td>
+        <td><%= p1.tip %></td>
+        <td><%= p2.tip %></td>
+        </tr>
+        <tr>
+        <td>Subcategorie</td>
+        <td><%= p1.subcategorie %></td>
+        <td><%= p2.subcategorie %></td>
+        </tr>
+        <tr>
+        <td>Culoare</td>
+        <td><%= p1.culoare %></td>
+        <td><%= p2.culoare %></td>
+        </tr>
+        <tr>
+        <td>Elemente personalizare</td>
+        <td><%= p1.elemente_personalizare.join(", ") %></td>
+        <td><%= p2.elemente_personalizare.join(", ") %></td>
+        </tr>
+        <tr>
+        <td>Data adăugare</td>
+        <td><%= p1.data_adaugare.toLocaleDateString("ro-RO") %></td>
+        <td><%= p2.data_adaugare.toLocaleDateString("ro-RO") %></td>
+        </tr>
+        <tr>
+        <td>Descriere</td>
+        <td><%= p1.descriere %></td>
+        <td><%= p2.descriere %></td>
+        </tr>
+        <tr>
+            <td>Imagine</td>
+            <td><img src="<%= p1.imagine %>" alt="Imagine <%= p1.nume %>" style="max-width: 150px; height: auto;"></td>
+            <td><img src="<%= p2.imagine %>" alt="Imagine <%= p2.nume %>" style="max-width: 150px; height: auto;"></td>
+          </tr>
+    </tbody>
+    </table>
+
+    </main>
+
+    <footer>
+    <%- include("../fragmente/footer.ejs") %>
+    </footer>
+
+    </body>
+</html>
+

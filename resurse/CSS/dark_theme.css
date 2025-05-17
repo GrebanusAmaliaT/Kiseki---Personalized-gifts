@@ -1,0 +1,62 @@
+body[data-theme="light"] {
+  --culoare-fundal-principal: #770a1c;
+  --bs-body-bg: #6f132a91;
+
+  background-color: var(--culoare-fundal-principal);
+
+  background-color: #31030c !important;
+}
+
+body[data-theme="dark"] {
+  --culoare-fundal-principal: #111; /* dark specific */
+}
+
+body[data-theme="neutral"] {
+  --culoare-fundal-principal: #770a1c; /* păstrează ce ai vrut inițial */
+}
+
+body[class="dark"] {
+  --culoare-fundal-principal: #1a1a1a;
+  --culoare-fundal-element: #665e5e;
+  --culoare-header: #333;
+  --culoare-deschisa: #83333c;
+  --culoare-footer2: #444;
+  --culoare-border: #666;
+  --culoare-linkuri: #ffbb00;
+  --culoare-linkuri-vizitate: #d5ff60;
+  color: white;
+  background-color: var(--culoare-fundal-principal);
+}
+
+body[class="dark"] header,
+body[class="dark"] footer {
+  background-color: var(--culoare-fundal-element);
+  color: white;
+}
+
+
+body[class="dark"] h1,
+body[class="dark"] h2,
+body[class="dark"] h3,
+body[class="dark"] h4,
+body[class="dark"] h5,
+body[class="dark"] h6,
+body[class="dark"] p,
+body[class="dark"] label,
+body[class="dark"] a,
+body[class="dark"] span,
+body[class="dark"] td,
+body[class="dark"] th,
+body[class="dark"] input,
+body[class="dark"] select,
+body[class="dark"] option {
+  color: white;
+}
+
+body[class="neutral"] {
+  --culoare-fundal-principal: #686649;
+  --culoare-text: #333;
+  --culoare-deschisa: #8c8888;
+  --culoare-header: #bc6767;
+  --culoare-footer2: #381919;
+}

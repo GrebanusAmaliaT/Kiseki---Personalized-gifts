@@ -472,7 +472,23 @@ iframe {
         left: -100%;
     }
 }
+.container-custom {
+    text-align: center;
+    padding: 40px 20px;
+  }
 
+  .btn-custom {
+    background-color: #63111c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+  }
+
+  .btn-custom:hover {
+    background-color: #dbd4e4;
+  }
 /*---------------------*/
 #mathml-calcul-pret {
     background: var(--culoare-header); 
