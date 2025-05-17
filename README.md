@@ -1,34 +1,43 @@
 # !This project is still a work in progress!
 
-## Kiseki - Personalized Gifts 🎁✨
-Kiseki is a website dedicated to personalized gifts, carefully crafted to bring a touch of magic to every special occasion.
-The word "Kiseki" means "miracle" — and it perfectly reflects what I want the site to convey: a gesture or a gift can mean everything to someone dear.
+## Kiseki - Personalized Gifts 🎁
+Kiseki is a dynamic web application for personalized gifts, built to bring meaningful moments to life through small, thoughtful gestures.
+The word Kiseki means miracle, reflecting the belief that even the smallest gift can have a lasting impact.
 
-## 🚀 Features (currently)
-- ✅ Static image gallery with dynamic display depending on the time of access
-- ✅ Dedicated sections for gift-giving traditions from different cultures
-- ✅ Organized work schedule and interactive calendar
-- ✅ Frequently Asked Questions (FAQ) section for clients
-- ✅ Automatic total price calculation, including optional special wrapping
-- ✅ Gift ideas for family, friends, and workplace
-- ✅ Educational videos about creative gift wrapping
-- ✅ Advanced CSS stylings: text reflection effect, zig-zag gallery layout, decorative separator, animated duotone image
-- ✅ Full responsiveness across all devices (desktop, tablet, mobile)
 
-## 🛠 Technologies & Concepts Used (currently)
-- HTML5 & EJS for page structure.
-- CSS3 & SCSS for advanced styling (using variables, nesting, and mixins where needed).
-- JavaScript (Node.js, Express) for server-side logic and dynamic image handling.
-- Sharp for automatic image resizing into multiple dimensions.
-- Full responsiveness using media queries.
-- Flexbox and CSS Grid for a modern and fluid layout.
+## Main Features 
+- Smart product filtering by: name, price range, size (radio), category (select), description (textarea), packaging (checkbox toggle), elements (multi-select), date of addition (date input)
+- Highlighting of newly added products, marked with a clear "NEW" badge (shown both in product list and on the individual product page)
+- Cheapest product in each category is clearly marked in the product list
+- Dedicated homepage section promoting the newest products in reverse chronological order
+- Product comparison functionality:
+-  - Select up to two products
+-  - Persistent selection via localStorage
+-  - Comparison container visible across all product pages
+-  - Tooltip/message for disabled buttons when limit is reached
+-  - New tab opens to display products side-by-side with all key details
+- Product bundles (sets):
+- -  Special page shows sets of products grouped by theme
+- - Set price is calculated with discount: sum - min(5,n)*5%
+- - Each product page lists all sets it belongs to, with navigation to related products
+- - Cart selection system:
+- Checkbox for adding products to cart
+- Stored in localStorage to persist user choices
+- Real-time total price display (keyboard shortcut Alt + C) for currently visible products
+- Product sorting:
+- - By price and name
+- - Ascending and descending
+- - Reset filters with confirmation dialog
+- - "No products found" message when filtering returns no results
 
-## 🎨 Highlights
-- ✅ Zig-zag layout gallery with smart time-based image display
-- ✅ Text reflection effect with smooth hover animation
-- ✅ Decorative separator line with a centered star
-- ✅ Duotone image effect with color transition on hover
-- ✅ Clearly structured, intuitive, and aesthetic sections
-- 
+## 🎨 Visual Highlights
+- Duotone image hover effect with smooth transitions
+- Animated text reflection
+- Zig-zag responsive gallery layout
+- Decorative separators with icons for better section distinction
+- 3 custom color themes (light, dark, and neutral), switchable via toggle buttons
+- Fully responsive design for desktop, tablet, and mobile
+  
 ## 📸
-![image](https://github.com/user-attachments/assets/ad6a4a7f-89b9-444d-8be3-dd24634553cd)
+![{996E44AF-1916-4F12-BC66-CE50CEDBF99A}](https://github.com/user-attachments/assets/08003fff-9661-4805-b9c2-42bba672acce)
+
