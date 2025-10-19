@@ -1,5 +1,3 @@
-# !This project is still a work in progress!
-
 ## Kiseki - Personalized Gifts 🎁
 Kiseki is a dynamic web application for personalized gifts, built to bring meaningful moments to life through small, thoughtful gestures.
 The word Kiseki means miracle, reflecting the belief that even the smallest gift can have a lasting impact.
@@ -30,7 +28,7 @@ The word Kiseki means miracle, reflecting the belief that even the smallest gift
 - - Reset filters with confirmation dialog
 - - "No products found" message when filtering returns no results
 
-## 🎨 Visual Highlights
+##  Visual Highlights
 - Duotone image hover effect with smooth transitions
 - Animated text reflection
 - Zig-zag responsive gallery layout
@@ -38,6 +36,6 @@ The word Kiseki means miracle, reflecting the belief that even the smallest gift
 - 3 custom color themes (light, dark, and neutral), switchable via toggle buttons
 - Fully responsive design for desktop, tablet, and mobile
   
-## 📸
+## Screenshots
 ![{996E44AF-1916-4F12-BC66-CE50CEDBF99A}](https://github.com/user-attachments/assets/08003fff-9661-4805-b9c2-42bba672acce)
 
