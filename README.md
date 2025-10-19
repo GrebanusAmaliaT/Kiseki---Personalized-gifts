@@ -1,4 +1,4 @@
-## Kiseki - Personalized Gifts 🎁
+# Kiseki - Personalized Gifts 🎁
 Kiseki is a dynamic web application for personalized gifts, built to bring meaningful moments to life through small, thoughtful gestures.
 The word Kiseki means miracle, reflecting the belief that even the smallest gift can have a lasting impact.
 
