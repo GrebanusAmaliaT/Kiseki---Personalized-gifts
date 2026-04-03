@@ -13,7 +13,6 @@ AccesBD.getInstanta().select({tabel:"cadouri", campuri:["*"]}, function(err,rez)
 });
 
 const Client=pg.Client;
-
 const client=new Client({
     database:"tehniciweb",
     user:"ami",
