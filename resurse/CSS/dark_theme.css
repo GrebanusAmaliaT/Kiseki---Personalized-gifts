@@ -3,7 +3,6 @@ body[data-theme="light"] {
   --bs-body-bg: #6f132a91;
 
   background-color: var(--culoare-fundal-principal);
-
   background-color: #31030c !important;
 }
 
