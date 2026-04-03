@@ -1,12 +1,9 @@
 /*
-
 ATENTIE!
 inca nu am implementat protectia contra SQL injection
 */
 
 const {Client, Pool}=require("pg");
-
-
 class AccesBD{
     static #instanta=null;
     static #initializat=false;
