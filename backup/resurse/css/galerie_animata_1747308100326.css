@@ -23,7 +23,6 @@
 .galerie-animata:hover .slide {
   animation-play-state: paused;
 }
-
 @keyframes glisare {
   0% {
     transform: translateX(0) scale(1);
